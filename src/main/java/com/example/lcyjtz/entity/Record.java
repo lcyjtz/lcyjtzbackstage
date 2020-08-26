@@ -5,11 +5,13 @@ public class Record {
 
     private String recordType;
 
-    private String recordTitle;
+    private String recordFilename;
 
     private String recordData;
 
     private String recordPath;
+
+    private String recordTitle;
 
     public Integer getRecordId() {
         return recordId;
@@ -27,12 +29,12 @@ public class Record {
         this.recordType = recordType == null ? null : recordType.trim();
     }
 
-    public String getRecordTitle() {
-        return recordTitle;
+    public String getRecordFilename() {
+        return recordFilename;
     }
 
-    public void setRecordTitle(String recordTitle) {
-        this.recordTitle = recordTitle == null ? null : recordTitle.trim();
+    public void setRecordFilename(String recordFilename) {
+        this.recordFilename = recordFilename == null ? null : recordFilename.trim();
     }
 
     public String getRecordData() {
@@ -49,5 +51,13 @@ public class Record {
 
     public void setRecordPath(String recordPath) {
         this.recordPath = recordPath == null ? null : recordPath.trim();
+    }
+
+    public String getRecordTitle() {
+        return recordTitle;
+    }
+
+    public void setRecordTitle(String recordTitle) {
+        this.recordTitle = recordTitle == null ? null : recordTitle.trim();
     }
 }

@@ -3,11 +3,13 @@ package com.example.lcyjtz.entity;
 public class Picture {
     private Integer pictureId;
 
-    private String pictureTitle;
+    private String pictureFilename;
 
     private String picturePath;
 
     private String pictureData;
+
+    private String pictureTitle;
 
     public Integer getPictureId() {
         return pictureId;
@@ -17,12 +19,12 @@ public class Picture {
         this.pictureId = pictureId;
     }
 
-    public String getPictureTitle() {
-        return pictureTitle;
+    public String getPictureFilename() {
+        return pictureFilename;
     }
 
-    public void setPictureTitle(String pictureTitle) {
-        this.pictureTitle = pictureTitle == null ? null : pictureTitle.trim();
+    public void setPictureFilename(String pictureFilename) {
+        this.pictureFilename = pictureFilename == null ? null : pictureFilename.trim();
     }
 
     public String getPicturePath() {
@@ -39,5 +41,13 @@ public class Picture {
 
     public void setPictureData(String pictureData) {
         this.pictureData = pictureData == null ? null : pictureData.trim();
+    }
+
+    public String getPictureTitle() {
+        return pictureTitle;
+    }
+
+    public void setPictureTitle(String pictureTitle) {
+        this.pictureTitle = pictureTitle == null ? null : pictureTitle.trim();
     }
 }

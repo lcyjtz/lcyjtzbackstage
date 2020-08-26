@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lcyjtz.mapper.PictureMapper" >
-  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Picture" >
+<mapper namespace="com.example.lcyjtz.mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Picture" >
     <id column="Picture_ID" property="pictureId" jdbcType="INTEGER" />
-    <result column="Picture_Title" property="pictureTitle" jdbcType="VARCHAR" />
+    <result column="Picture_FileName" property="pictureFilename" jdbcType="VARCHAR" />
     <result column="Picture_Path" property="picturePath" jdbcType="VARCHAR" />
     <result column="Picture_Data" property="pictureData" jdbcType="VARCHAR" />
+    <result column="Picture_Title" property="pictureTitle" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,9 +67,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Picture_ID, Picture_Title, Picture_Path, Picture_Data
+    Picture_ID, Picture_FileName, Picture_Path, Picture_Data, Picture_Title
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.PictureExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.PictureExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,26 +94,26 @@
     delete from picture
     where Picture_ID = #{pictureId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.PictureExample" >
+  <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.PictureExample" >
     delete from picture
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lcyjtz.entity.Picture" >
-    insert into picture (Picture_ID, Picture_Title, Picture_Path, 
-      Picture_Data)
-    values (#{pictureId,jdbcType=INTEGER}, #{pictureTitle,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, 
-      #{pictureData,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.example.lcyjtz.entity.Picture" >
+    insert into picture (Picture_ID, Picture_FileName, Picture_Path, 
+      Picture_Data, Picture_Title)
+    values (#{pictureId,jdbcType=INTEGER}, #{pictureFilename,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, 
+      #{pictureData,jdbcType=VARCHAR}, #{pictureTitle,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Picture" >
+  <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Picture" >
     insert into picture
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="pictureId != null" >
         Picture_ID,
       </if>
-      <if test="pictureTitle != null" >
-        Picture_Title,
+      <if test="pictureFilename != null" >
+        Picture_FileName,
       </if>
       <if test="picturePath != null" >
         Picture_Path,
@@ -120,13 +121,16 @@
       <if test="pictureData != null" >
         Picture_Data,
       </if>
+      <if test="pictureTitle != null" >
+        Picture_Title,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="pictureId != null" >
         #{pictureId,jdbcType=INTEGER},
       </if>
-      <if test="pictureTitle != null" >
-        #{pictureTitle,jdbcType=VARCHAR},
+      <if test="pictureFilename != null" >
+        #{pictureFilename,jdbcType=VARCHAR},
       </if>
       <if test="picturePath != null" >
         #{picturePath,jdbcType=VARCHAR},
@@ -134,9 +138,12 @@
       <if test="pictureData != null" >
         #{pictureData,jdbcType=VARCHAR},
       </if>
+      <if test="pictureTitle != null" >
+        #{pictureTitle,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lcyjtz.entity.PictureExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.example.lcyjtz.entity.PictureExample" resultType="java.lang.Integer" >
     select count(*) from picture
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -148,14 +155,17 @@
       <if test="record.pictureId != null" >
         Picture_ID = #{record.pictureId,jdbcType=INTEGER},
       </if>
-      <if test="record.pictureTitle != null" >
-        Picture_Title = #{record.pictureTitle,jdbcType=VARCHAR},
+      <if test="record.pictureFilename != null" >
+        Picture_FileName = #{record.pictureFilename,jdbcType=VARCHAR},
       </if>
       <if test="record.picturePath != null" >
         Picture_Path = #{record.picturePath,jdbcType=VARCHAR},
       </if>
       <if test="record.pictureData != null" >
         Picture_Data = #{record.pictureData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureTitle != null" >
+        Picture_Title = #{record.pictureTitle,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -165,18 +175,19 @@
   <update id="updateByExample" parameterType="map" >
     update picture
     set Picture_ID = #{record.pictureId,jdbcType=INTEGER},
-      Picture_Title = #{record.pictureTitle,jdbcType=VARCHAR},
+      Picture_FileName = #{record.pictureFilename,jdbcType=VARCHAR},
       Picture_Path = #{record.picturePath,jdbcType=VARCHAR},
-      Picture_Data = #{record.pictureData,jdbcType=VARCHAR}
+      Picture_Data = #{record.pictureData,jdbcType=VARCHAR},
+      Picture_Title = #{record.pictureTitle,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Picture" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Picture" >
     update picture
     <set >
-      <if test="pictureTitle != null" >
-        Picture_Title = #{pictureTitle,jdbcType=VARCHAR},
+      <if test="pictureFilename != null" >
+        Picture_FileName = #{pictureFilename,jdbcType=VARCHAR},
       </if>
       <if test="picturePath != null" >
         Picture_Path = #{picturePath,jdbcType=VARCHAR},
@@ -184,14 +195,18 @@
       <if test="pictureData != null" >
         Picture_Data = #{pictureData,jdbcType=VARCHAR},
       </if>
+      <if test="pictureTitle != null" >
+        Picture_Title = #{pictureTitle,jdbcType=VARCHAR},
+      </if>
     </set>
     where Picture_ID = #{pictureId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Picture" >
+  <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Picture" >
     update picture
-    set Picture_Title = #{pictureTitle,jdbcType=VARCHAR},
+    set Picture_FileName = #{pictureFilename,jdbcType=VARCHAR},
       Picture_Path = #{picturePath,jdbcType=VARCHAR},
-      Picture_Data = #{pictureData,jdbcType=VARCHAR}
+      Picture_Data = #{pictureData,jdbcType=VARCHAR},
+      Picture_Title = #{pictureTitle,jdbcType=VARCHAR}
     where Picture_ID = #{pictureId,jdbcType=INTEGER}
   </update>
 </mapper>

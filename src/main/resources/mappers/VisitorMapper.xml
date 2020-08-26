@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lcyjtz.mapper.VisitorMapper" >
-  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Visitor" >
+<mapper namespace="com.example.lcyjtz.mapper.VisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Visitor" >
     <id column="VisitorID" property="visitorid" jdbcType="INTEGER" />
     <result column="VisitorName" property="visitorname" jdbcType="VARCHAR" />
     <result column="Visitorpwd" property="visitorpwd" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     VisitorID, VisitorName, Visitorpwd, VisitorRoleID
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.VisitorExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.VisitorExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,19 +93,19 @@
     delete from visitor
     where VisitorID = #{visitorid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.VisitorExample" >
+  <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.VisitorExample" >
     delete from visitor
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lcyjtz.entity.Visitor" >
+  <insert id="insert" parameterType="com.example.lcyjtz.entity.Visitor" >
     insert into visitor (VisitorID, VisitorName, Visitorpwd, 
       VisitorRoleID)
     values (#{visitorid,jdbcType=INTEGER}, #{visitorname,jdbcType=VARCHAR}, #{visitorpwd,jdbcType=VARCHAR}, 
       #{visitorroleid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Visitor" >
+  <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Visitor" >
     insert into visitor
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="visitorid != null" >
@@ -136,7 +136,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lcyjtz.entity.VisitorExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.example.lcyjtz.entity.VisitorExample" resultType="java.lang.Integer" >
     select count(*) from visitor
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -172,7 +172,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Visitor" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Visitor" >
     update visitor
     <set >
       <if test="visitorname != null" >
@@ -187,7 +187,7 @@
     </set>
     where VisitorID = #{visitorid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Visitor" >
+  <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Visitor" >
     update visitor
     set VisitorName = #{visitorname,jdbcType=VARCHAR},
       Visitorpwd = #{visitorpwd,jdbcType=VARCHAR},

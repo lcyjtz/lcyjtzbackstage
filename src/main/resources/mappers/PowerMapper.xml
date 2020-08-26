@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lcyjtz.mapper.PowerMapper" >
-  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Power" >
+<mapper namespace="com.example.lcyjtz.mapper.PowerMapper" >
+  <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Power" >
     <id column="power_id" property="powerId" jdbcType="INTEGER" />
     <result column="power_type" property="powerType" jdbcType="VARCHAR" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     power_id, power_type
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.PowerExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.PowerExample" >
     select
     <if test="distinct" >
       distinct
@@ -91,17 +91,17 @@
     delete from power
     where power_id = #{powerId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.PowerExample" >
+  <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.PowerExample" >
     delete from power
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lcyjtz.entity.Power" >
+  <insert id="insert" parameterType="com.example.lcyjtz.entity.Power" >
     insert into power (power_id, power_type)
     values (#{powerId,jdbcType=INTEGER}, #{powerType,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Power" >
+  <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Power" >
     insert into power
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="powerId != null" >
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lcyjtz.entity.PowerExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.example.lcyjtz.entity.PowerExample" resultType="java.lang.Integer" >
     select count(*) from power
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -148,7 +148,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Power" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Power" >
     update power
     <set >
       <if test="powerType != null" >
@@ -157,7 +157,7 @@
     </set>
     where power_id = #{powerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Power" >
+  <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Power" >
     update power
     set power_type = #{powerType,jdbcType=VARCHAR}
     where power_id = #{powerId,jdbcType=INTEGER}

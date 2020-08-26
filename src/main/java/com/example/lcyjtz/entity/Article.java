@@ -3,11 +3,13 @@ package com.example.lcyjtz.entity;
 public class Article {
     private Integer articleId;
 
-    private String articleTitle;
+    private String articleFilename;
 
     private String articlePath;
 
     private String articleData;
+
+    private String articleTitle;
 
     public Integer getArticleId() {
         return articleId;
@@ -17,12 +19,12 @@ public class Article {
         this.articleId = articleId;
     }
 
-    public String getArticleTitle() {
-        return articleTitle;
+    public String getArticleFilename() {
+        return articleFilename;
     }
 
-    public void setArticleTitle(String articleTitle) {
-        this.articleTitle = articleTitle == null ? null : articleTitle.trim();
+    public void setArticleFilename(String articleFilename) {
+        this.articleFilename = articleFilename == null ? null : articleFilename.trim();
     }
 
     public String getArticlePath() {
@@ -39,5 +41,13 @@ public class Article {
 
     public void setArticleData(String articleData) {
         this.articleData = articleData == null ? null : articleData.trim();
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle == null ? null : articleTitle.trim();
     }
 }

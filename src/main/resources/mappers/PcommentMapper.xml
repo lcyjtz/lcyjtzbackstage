@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lcyjtz.mapper.PcommentMapper" >
-  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Pcomment" >
+<mapper namespace="com.example.lcyjtz.mapper.PcommentMapper" >
+  <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Pcomment" >
     <id column="PComment_ID" property="pcommentId" jdbcType="INTEGER" />
     <result column="PComment_UserName" property="pcommentUsername" jdbcType="VARCHAR" />
     <result column="PComment_PictureID" property="pcommentPictureid" jdbcType="INTEGER" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     PComment_ID, PComment_UserName, PComment_PictureID, PComment_Data, PComment_Context
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.PcommentExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.PcommentExample" >
     select
     <if test="distinct" >
       distinct
@@ -94,19 +94,19 @@
     delete from pcomment
     where PComment_ID = #{pcommentId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.PcommentExample" >
+  <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.PcommentExample" >
     delete from pcomment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lcyjtz.entity.Pcomment" >
+  <insert id="insert" parameterType="com.example.lcyjtz.entity.Pcomment" >
     insert into pcomment (PComment_ID, PComment_UserName, PComment_PictureID, 
       PComment_Data, PComment_Context)
     values (#{pcommentId,jdbcType=INTEGER}, #{pcommentUsername,jdbcType=VARCHAR}, #{pcommentPictureid,jdbcType=INTEGER}, 
       #{pcommentData,jdbcType=VARCHAR}, #{pcommentContext,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Pcomment" >
+  <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Pcomment" >
     insert into pcomment
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="pcommentId != null" >
@@ -143,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lcyjtz.entity.PcommentExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.example.lcyjtz.entity.PcommentExample" resultType="java.lang.Integer" >
     select count(*) from pcomment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -183,7 +183,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Pcomment" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Pcomment" >
     update pcomment
     <set >
       <if test="pcommentUsername != null" >
@@ -201,7 +201,7 @@
     </set>
     where PComment_ID = #{pcommentId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Pcomment" >
+  <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Pcomment" >
     update pcomment
     set PComment_UserName = #{pcommentUsername,jdbcType=VARCHAR},
       PComment_PictureID = #{pcommentPictureid,jdbcType=INTEGER},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lcyjtz.mapper.VcommentMapper" >
-  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Vcomment" >
+<mapper namespace="com.example.lcyjtz.mapper.VcommentMapper" >
+  <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Vcomment" >
     <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER" />
     <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER" />
     <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     VComment_ID, VComment_VideoID, VComment_Content, VComment_UserName, VComment_Data
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.VcommentExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.VcommentExample" >
     select
     <if test="distinct" >
       distinct
@@ -94,19 +94,19 @@
     delete from vcomment
     where VComment_ID = #{vcommentId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.VcommentExample" >
+  <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.VcommentExample" >
     delete from vcomment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lcyjtz.entity.Vcomment" >
+  <insert id="insert" parameterType="com.example.lcyjtz.entity.Vcomment" >
     insert into vcomment (VComment_ID, VComment_VideoID, VComment_Content, 
       VComment_UserName, VComment_Data)
     values (#{vcommentId,jdbcType=INTEGER}, #{vcommentVideoid,jdbcType=INTEGER}, #{vcommentContent,jdbcType=VARCHAR}, 
       #{vcommentUsername,jdbcType=VARCHAR}, #{vcommentData,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Vcomment" >
+  <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Vcomment" >
     insert into vcomment
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="vcommentId != null" >
@@ -143,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lcyjtz.entity.VcommentExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.example.lcyjtz.entity.VcommentExample" resultType="java.lang.Integer" >
     select count(*) from vcomment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -183,7 +183,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Vcomment" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Vcomment" >
     update vcomment
     <set >
       <if test="vcommentVideoid != null" >
@@ -201,7 +201,7 @@
     </set>
     where VComment_ID = #{vcommentId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Vcomment" >
+  <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Vcomment" >
     update vcomment
     set VComment_VideoID = #{vcommentVideoid,jdbcType=INTEGER},
       VComment_Content = #{vcommentContent,jdbcType=VARCHAR},

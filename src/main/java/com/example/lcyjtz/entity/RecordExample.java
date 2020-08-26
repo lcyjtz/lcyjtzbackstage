@@ -234,73 +234,73 @@ public class RecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleIsNull() {
-            addCriterion("Record_Title is null");
+        public Criteria andRecordFilenameIsNull() {
+            addCriterion("Record_FileName is null");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleIsNotNull() {
-            addCriterion("Record_Title is not null");
+        public Criteria andRecordFilenameIsNotNull() {
+            addCriterion("Record_FileName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleEqualTo(String value) {
-            addCriterion("Record_Title =", value, "recordTitle");
+        public Criteria andRecordFilenameEqualTo(String value) {
+            addCriterion("Record_FileName =", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleNotEqualTo(String value) {
-            addCriterion("Record_Title <>", value, "recordTitle");
+        public Criteria andRecordFilenameNotEqualTo(String value) {
+            addCriterion("Record_FileName <>", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleGreaterThan(String value) {
-            addCriterion("Record_Title >", value, "recordTitle");
+        public Criteria andRecordFilenameGreaterThan(String value) {
+            addCriterion("Record_FileName >", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("Record_Title >=", value, "recordTitle");
+        public Criteria andRecordFilenameGreaterThanOrEqualTo(String value) {
+            addCriterion("Record_FileName >=", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleLessThan(String value) {
-            addCriterion("Record_Title <", value, "recordTitle");
+        public Criteria andRecordFilenameLessThan(String value) {
+            addCriterion("Record_FileName <", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleLessThanOrEqualTo(String value) {
-            addCriterion("Record_Title <=", value, "recordTitle");
+        public Criteria andRecordFilenameLessThanOrEqualTo(String value) {
+            addCriterion("Record_FileName <=", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleLike(String value) {
-            addCriterion("Record_Title like", value, "recordTitle");
+        public Criteria andRecordFilenameLike(String value) {
+            addCriterion("Record_FileName like", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleNotLike(String value) {
-            addCriterion("Record_Title not like", value, "recordTitle");
+        public Criteria andRecordFilenameNotLike(String value) {
+            addCriterion("Record_FileName not like", value, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleIn(List<String> values) {
-            addCriterion("Record_Title in", values, "recordTitle");
+        public Criteria andRecordFilenameIn(List<String> values) {
+            addCriterion("Record_FileName in", values, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleNotIn(List<String> values) {
-            addCriterion("Record_Title not in", values, "recordTitle");
+        public Criteria andRecordFilenameNotIn(List<String> values) {
+            addCriterion("Record_FileName not in", values, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleBetween(String value1, String value2) {
-            addCriterion("Record_Title between", value1, value2, "recordTitle");
+        public Criteria andRecordFilenameBetween(String value1, String value2) {
+            addCriterion("Record_FileName between", value1, value2, "recordFilename");
             return (Criteria) this;
         }
 
-        public Criteria andRecordTitleNotBetween(String value1, String value2) {
-            addCriterion("Record_Title not between", value1, value2, "recordTitle");
+        public Criteria andRecordFilenameNotBetween(String value1, String value2) {
+            addCriterion("Record_FileName not between", value1, value2, "recordFilename");
             return (Criteria) this;
         }
 
@@ -441,6 +441,76 @@ public class RecordExample {
 
         public Criteria andRecordPathNotBetween(String value1, String value2) {
             addCriterion("Record_Path not between", value1, value2, "recordPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleIsNull() {
+            addCriterion("Record_Title is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleIsNotNull() {
+            addCriterion("Record_Title is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleEqualTo(String value) {
+            addCriterion("Record_Title =", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleNotEqualTo(String value) {
+            addCriterion("Record_Title <>", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleGreaterThan(String value) {
+            addCriterion("Record_Title >", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("Record_Title >=", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleLessThan(String value) {
+            addCriterion("Record_Title <", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleLessThanOrEqualTo(String value) {
+            addCriterion("Record_Title <=", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleLike(String value) {
+            addCriterion("Record_Title like", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleNotLike(String value) {
+            addCriterion("Record_Title not like", value, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleIn(List<String> values) {
+            addCriterion("Record_Title in", values, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleNotIn(List<String> values) {
+            addCriterion("Record_Title not in", values, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleBetween(String value1, String value2) {
+            addCriterion("Record_Title between", value1, value2, "recordTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTitleNotBetween(String value1, String value2) {
+            addCriterion("Record_Title not between", value1, value2, "recordTitle");
             return (Criteria) this;
         }
     }

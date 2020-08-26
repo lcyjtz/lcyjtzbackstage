@@ -164,73 +164,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleIsNull() {
-            addCriterion("Video_title is null");
+        public Criteria andVideoFilenameIsNull() {
+            addCriterion("Video_FileName is null");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleIsNotNull() {
-            addCriterion("Video_title is not null");
+        public Criteria andVideoFilenameIsNotNull() {
+            addCriterion("Video_FileName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleEqualTo(String value) {
-            addCriterion("Video_title =", value, "videoTitle");
+        public Criteria andVideoFilenameEqualTo(String value) {
+            addCriterion("Video_FileName =", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleNotEqualTo(String value) {
-            addCriterion("Video_title <>", value, "videoTitle");
+        public Criteria andVideoFilenameNotEqualTo(String value) {
+            addCriterion("Video_FileName <>", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleGreaterThan(String value) {
-            addCriterion("Video_title >", value, "videoTitle");
+        public Criteria andVideoFilenameGreaterThan(String value) {
+            addCriterion("Video_FileName >", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("Video_title >=", value, "videoTitle");
+        public Criteria andVideoFilenameGreaterThanOrEqualTo(String value) {
+            addCriterion("Video_FileName >=", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleLessThan(String value) {
-            addCriterion("Video_title <", value, "videoTitle");
+        public Criteria andVideoFilenameLessThan(String value) {
+            addCriterion("Video_FileName <", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleLessThanOrEqualTo(String value) {
-            addCriterion("Video_title <=", value, "videoTitle");
+        public Criteria andVideoFilenameLessThanOrEqualTo(String value) {
+            addCriterion("Video_FileName <=", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleLike(String value) {
-            addCriterion("Video_title like", value, "videoTitle");
+        public Criteria andVideoFilenameLike(String value) {
+            addCriterion("Video_FileName like", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleNotLike(String value) {
-            addCriterion("Video_title not like", value, "videoTitle");
+        public Criteria andVideoFilenameNotLike(String value) {
+            addCriterion("Video_FileName not like", value, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleIn(List<String> values) {
-            addCriterion("Video_title in", values, "videoTitle");
+        public Criteria andVideoFilenameIn(List<String> values) {
+            addCriterion("Video_FileName in", values, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleNotIn(List<String> values) {
-            addCriterion("Video_title not in", values, "videoTitle");
+        public Criteria andVideoFilenameNotIn(List<String> values) {
+            addCriterion("Video_FileName not in", values, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleBetween(String value1, String value2) {
-            addCriterion("Video_title between", value1, value2, "videoTitle");
+        public Criteria andVideoFilenameBetween(String value1, String value2) {
+            addCriterion("Video_FileName between", value1, value2, "videoFilename");
             return (Criteria) this;
         }
 
-        public Criteria andVideoTitleNotBetween(String value1, String value2) {
-            addCriterion("Video_title not between", value1, value2, "videoTitle");
+        public Criteria andVideoFilenameNotBetween(String value1, String value2) {
+            addCriterion("Video_FileName not between", value1, value2, "videoFilename");
             return (Criteria) this;
         }
 
@@ -371,6 +371,76 @@ public class VideoExample {
 
         public Criteria andVideoDataNotBetween(String value1, String value2) {
             addCriterion("Video_Data not between", value1, value2, "videoData");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleIsNull() {
+            addCriterion("Video_Title is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleIsNotNull() {
+            addCriterion("Video_Title is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleEqualTo(String value) {
+            addCriterion("Video_Title =", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleNotEqualTo(String value) {
+            addCriterion("Video_Title <>", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleGreaterThan(String value) {
+            addCriterion("Video_Title >", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("Video_Title >=", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleLessThan(String value) {
+            addCriterion("Video_Title <", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleLessThanOrEqualTo(String value) {
+            addCriterion("Video_Title <=", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleLike(String value) {
+            addCriterion("Video_Title like", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleNotLike(String value) {
+            addCriterion("Video_Title not like", value, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleIn(List<String> values) {
+            addCriterion("Video_Title in", values, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleNotIn(List<String> values) {
+            addCriterion("Video_Title not in", values, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleBetween(String value1, String value2) {
+            addCriterion("Video_Title between", value1, value2, "videoTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andVideoTitleNotBetween(String value1, String value2) {
+            addCriterion("Video_Title not between", value1, value2, "videoTitle");
             return (Criteria) this;
         }
     }

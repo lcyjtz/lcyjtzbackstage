@@ -3,11 +3,13 @@ package com.example.lcyjtz.entity;
 public class Video {
     private Integer videoId;
 
-    private String videoTitle;
+    private String videoFilename;
 
     private String videoPath;
 
     private String videoData;
+
+    private String videoTitle;
 
     public Integer getVideoId() {
         return videoId;
@@ -17,12 +19,12 @@ public class Video {
         this.videoId = videoId;
     }
 
-    public String getVideoTitle() {
-        return videoTitle;
+    public String getVideoFilename() {
+        return videoFilename;
     }
 
-    public void setVideoTitle(String videoTitle) {
-        this.videoTitle = videoTitle == null ? null : videoTitle.trim();
+    public void setVideoFilename(String videoFilename) {
+        this.videoFilename = videoFilename == null ? null : videoFilename.trim();
     }
 
     public String getVideoPath() {
@@ -39,5 +41,13 @@ public class Video {
 
     public void setVideoData(String videoData) {
         this.videoData = videoData == null ? null : videoData.trim();
+    }
+
+    public String getVideoTitle() {
+        return videoTitle;
+    }
+
+    public void setVideoTitle(String videoTitle) {
+        this.videoTitle = videoTitle == null ? null : videoTitle.trim();
     }
 }
