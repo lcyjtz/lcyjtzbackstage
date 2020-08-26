@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lcyjtz.mapper.PcommentMapper" >
+  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Pcomment" >
+    <id column="PComment_ID" property="pcommentId" jdbcType="INTEGER" />
+    <result column="PComment_UserName" property="pcommentUsername" jdbcType="VARCHAR" />
+    <result column="PComment_PictureID" property="pcommentPictureid" jdbcType="INTEGER" />
+    <result column="PComment_Data" property="pcommentData" jdbcType="VARCHAR" />
+    <result column="PComment_Context" property="pcommentContext" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PComment_ID, PComment_UserName, PComment_PictureID, PComment_Data, PComment_Context
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.PcommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from pcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pcomment
+    where PComment_ID = #{pcommentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pcomment
+    where PComment_ID = #{pcommentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.PcommentExample" >
+    delete from pcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lcyjtz.entity.Pcomment" >
+    insert into pcomment (PComment_ID, PComment_UserName, PComment_PictureID, 
+      PComment_Data, PComment_Context)
+    values (#{pcommentId,jdbcType=INTEGER}, #{pcommentUsername,jdbcType=VARCHAR}, #{pcommentPictureid,jdbcType=INTEGER}, 
+      #{pcommentData,jdbcType=VARCHAR}, #{pcommentContext,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Pcomment" >
+    insert into pcomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pcommentId != null" >
+        PComment_ID,
+      </if>
+      <if test="pcommentUsername != null" >
+        PComment_UserName,
+      </if>
+      <if test="pcommentPictureid != null" >
+        PComment_PictureID,
+      </if>
+      <if test="pcommentData != null" >
+        PComment_Data,
+      </if>
+      <if test="pcommentContext != null" >
+        PComment_Context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pcommentId != null" >
+        #{pcommentId,jdbcType=INTEGER},
+      </if>
+      <if test="pcommentUsername != null" >
+        #{pcommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="pcommentPictureid != null" >
+        #{pcommentPictureid,jdbcType=INTEGER},
+      </if>
+      <if test="pcommentData != null" >
+        #{pcommentData,jdbcType=VARCHAR},
+      </if>
+      <if test="pcommentContext != null" >
+        #{pcommentContext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lcyjtz.entity.PcommentExample" resultType="java.lang.Integer" >
+    select count(*) from pcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pcomment
+    <set >
+      <if test="record.pcommentId != null" >
+        PComment_ID = #{record.pcommentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pcommentUsername != null" >
+        PComment_UserName = #{record.pcommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcommentPictureid != null" >
+        PComment_PictureID = #{record.pcommentPictureid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pcommentData != null" >
+        PComment_Data = #{record.pcommentData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcommentContext != null" >
+        PComment_Context = #{record.pcommentContext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pcomment
+    set PComment_ID = #{record.pcommentId,jdbcType=INTEGER},
+      PComment_UserName = #{record.pcommentUsername,jdbcType=VARCHAR},
+      PComment_PictureID = #{record.pcommentPictureid,jdbcType=INTEGER},
+      PComment_Data = #{record.pcommentData,jdbcType=VARCHAR},
+      PComment_Context = #{record.pcommentContext,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Pcomment" >
+    update pcomment
+    <set >
+      <if test="pcommentUsername != null" >
+        PComment_UserName = #{pcommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="pcommentPictureid != null" >
+        PComment_PictureID = #{pcommentPictureid,jdbcType=INTEGER},
+      </if>
+      <if test="pcommentData != null" >
+        PComment_Data = #{pcommentData,jdbcType=VARCHAR},
+      </if>
+      <if test="pcommentContext != null" >
+        PComment_Context = #{pcommentContext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PComment_ID = #{pcommentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Pcomment" >
+    update pcomment
+    set PComment_UserName = #{pcommentUsername,jdbcType=VARCHAR},
+      PComment_PictureID = #{pcommentPictureid,jdbcType=INTEGER},
+      PComment_Data = #{pcommentData,jdbcType=VARCHAR},
+      PComment_Context = #{pcommentContext,jdbcType=VARCHAR}
+    where PComment_ID = #{pcommentId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lcyjtz.mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Picture" >
+    <id column="Picture_ID" property="pictureId" jdbcType="INTEGER" />
+    <result column="Picture_Title" property="pictureTitle" jdbcType="VARCHAR" />
+    <result column="Picture_Path" property="picturePath" jdbcType="VARCHAR" />
+    <result column="Picture_Data" property="pictureData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Picture_ID, Picture_Title, Picture_Path, Picture_Data
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.PictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where Picture_ID = #{pictureId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from picture
+    where Picture_ID = #{pictureId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.PictureExample" >
+    delete from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lcyjtz.entity.Picture" >
+    insert into picture (Picture_ID, Picture_Title, Picture_Path, 
+      Picture_Data)
+    values (#{pictureId,jdbcType=INTEGER}, #{pictureTitle,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, 
+      #{pictureData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Picture" >
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pictureId != null" >
+        Picture_ID,
+      </if>
+      <if test="pictureTitle != null" >
+        Picture_Title,
+      </if>
+      <if test="picturePath != null" >
+        Picture_Path,
+      </if>
+      <if test="pictureData != null" >
+        Picture_Data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pictureId != null" >
+        #{pictureId,jdbcType=INTEGER},
+      </if>
+      <if test="pictureTitle != null" >
+        #{pictureTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null" >
+        #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureData != null" >
+        #{pictureData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lcyjtz.entity.PictureExample" resultType="java.lang.Integer" >
+    select count(*) from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update picture
+    <set >
+      <if test="record.pictureId != null" >
+        Picture_ID = #{record.pictureId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pictureTitle != null" >
+        Picture_Title = #{record.pictureTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picturePath != null" >
+        Picture_Path = #{record.picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureData != null" >
+        Picture_Data = #{record.pictureData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update picture
+    set Picture_ID = #{record.pictureId,jdbcType=INTEGER},
+      Picture_Title = #{record.pictureTitle,jdbcType=VARCHAR},
+      Picture_Path = #{record.picturePath,jdbcType=VARCHAR},
+      Picture_Data = #{record.pictureData,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Picture" >
+    update picture
+    <set >
+      <if test="pictureTitle != null" >
+        Picture_Title = #{pictureTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null" >
+        Picture_Path = #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureData != null" >
+        Picture_Data = #{pictureData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Picture_ID = #{pictureId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Picture" >
+    update picture
+    set Picture_Title = #{pictureTitle,jdbcType=VARCHAR},
+      Picture_Path = #{picturePath,jdbcType=VARCHAR},
+      Picture_Data = #{pictureData,jdbcType=VARCHAR}
+    where Picture_ID = #{pictureId,jdbcType=INTEGER}
+  </update>
+</mapper>

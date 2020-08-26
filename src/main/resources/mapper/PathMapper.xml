@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lcyjtz.mapper.PathMapper" >
+  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Path" >
+    <result column="Video_Path" property="videoPath" jdbcType="VARCHAR" />
+    <result column="Picture_Path" property="picturePath" jdbcType="VARCHAR" />
+    <result column="Article_Path" property="articlePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Video_Path, Picture_Path, Article_Path
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.PathExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from path
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.PathExample" >
+    delete from path
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lcyjtz.entity.Path" >
+    insert into path (Video_Path, Picture_Path, Article_Path
+      )
+    values (#{videoPath,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, #{articlePath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Path" >
+    insert into path
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoPath != null" >
+        Video_Path,
+      </if>
+      <if test="picturePath != null" >
+        Picture_Path,
+      </if>
+      <if test="articlePath != null" >
+        Article_Path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoPath != null" >
+        #{videoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null" >
+        #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="articlePath != null" >
+        #{articlePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lcyjtz.entity.PathExample" resultType="java.lang.Integer" >
+    select count(*) from path
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update path
+    <set >
+      <if test="record.videoPath != null" >
+        Video_Path = #{record.videoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picturePath != null" >
+        Picture_Path = #{record.picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articlePath != null" >
+        Article_Path = #{record.articlePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update path
+    set Video_Path = #{record.videoPath,jdbcType=VARCHAR},
+      Picture_Path = #{record.picturePath,jdbcType=VARCHAR},
+      Article_Path = #{record.articlePath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

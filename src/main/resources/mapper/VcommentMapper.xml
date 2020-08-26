@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lcyjtz.mapper.VcommentMapper" >
+  <resultMap id="BaseResultMap" type="com.lcyjtz.entity.Vcomment" >
+    <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER" />
+    <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER" />
+    <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR" />
+    <result column="VComment_UserName" property="vcommentUsername" jdbcType="VARCHAR" />
+    <result column="VComment_Data" property="vcommentData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    VComment_ID, VComment_VideoID, VComment_Content, VComment_UserName, VComment_Data
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lcyjtz.entity.VcommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from vcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from vcomment
+    where VComment_ID = #{vcommentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from vcomment
+    where VComment_ID = #{vcommentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lcyjtz.entity.VcommentExample" >
+    delete from vcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lcyjtz.entity.Vcomment" >
+    insert into vcomment (VComment_ID, VComment_VideoID, VComment_Content, 
+      VComment_UserName, VComment_Data)
+    values (#{vcommentId,jdbcType=INTEGER}, #{vcommentVideoid,jdbcType=INTEGER}, #{vcommentContent,jdbcType=VARCHAR}, 
+      #{vcommentUsername,jdbcType=VARCHAR}, #{vcommentData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcyjtz.entity.Vcomment" >
+    insert into vcomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vcommentId != null" >
+        VComment_ID,
+      </if>
+      <if test="vcommentVideoid != null" >
+        VComment_VideoID,
+      </if>
+      <if test="vcommentContent != null" >
+        VComment_Content,
+      </if>
+      <if test="vcommentUsername != null" >
+        VComment_UserName,
+      </if>
+      <if test="vcommentData != null" >
+        VComment_Data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vcommentId != null" >
+        #{vcommentId,jdbcType=INTEGER},
+      </if>
+      <if test="vcommentVideoid != null" >
+        #{vcommentVideoid,jdbcType=INTEGER},
+      </if>
+      <if test="vcommentContent != null" >
+        #{vcommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="vcommentUsername != null" >
+        #{vcommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="vcommentData != null" >
+        #{vcommentData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lcyjtz.entity.VcommentExample" resultType="java.lang.Integer" >
+    select count(*) from vcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vcomment
+    <set >
+      <if test="record.vcommentId != null" >
+        VComment_ID = #{record.vcommentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcommentVideoid != null" >
+        VComment_VideoID = #{record.vcommentVideoid,jdbcType=INTEGER},
+      </if>
+      <if test="record.vcommentContent != null" >
+        VComment_Content = #{record.vcommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcommentUsername != null" >
+        VComment_UserName = #{record.vcommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcommentData != null" >
+        VComment_Data = #{record.vcommentData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vcomment
+    set VComment_ID = #{record.vcommentId,jdbcType=INTEGER},
+      VComment_VideoID = #{record.vcommentVideoid,jdbcType=INTEGER},
+      VComment_Content = #{record.vcommentContent,jdbcType=VARCHAR},
+      VComment_UserName = #{record.vcommentUsername,jdbcType=VARCHAR},
+      VComment_Data = #{record.vcommentData,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcyjtz.entity.Vcomment" >
+    update vcomment
+    <set >
+      <if test="vcommentVideoid != null" >
+        VComment_VideoID = #{vcommentVideoid,jdbcType=INTEGER},
+      </if>
+      <if test="vcommentContent != null" >
+        VComment_Content = #{vcommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="vcommentUsername != null" >
+        VComment_UserName = #{vcommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="vcommentData != null" >
+        VComment_Data = #{vcommentData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VComment_ID = #{vcommentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcyjtz.entity.Vcomment" >
+    update vcomment
+    set VComment_VideoID = #{vcommentVideoid,jdbcType=INTEGER},
+      VComment_Content = #{vcommentContent,jdbcType=VARCHAR},
+      VComment_UserName = #{vcommentUsername,jdbcType=VARCHAR},
+      VComment_Data = #{vcommentData,jdbcType=VARCHAR}
+    where VComment_ID = #{vcommentId,jdbcType=INTEGER}
+  </update>
+</mapper>
