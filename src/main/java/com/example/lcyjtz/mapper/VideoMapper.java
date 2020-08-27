@@ -2,7 +2,9 @@ package com.example.lcyjtz.mapper;
 
 import com.example.lcyjtz.entity.Video;
 import com.example.lcyjtz.entity.VideoExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface VideoMapper {
@@ -18,7 +20,7 @@ public interface VideoMapper {
 
     List<Video> selectByExample(VideoExample example);
 
-    Video selectByPrimaryKey(Integer videoId);
+    List<Video> selectByPrimaryKey(Integer videoId);
 
     int updateByExampleSelective(@Param("record") Video record, @Param("example") VideoExample example);
 

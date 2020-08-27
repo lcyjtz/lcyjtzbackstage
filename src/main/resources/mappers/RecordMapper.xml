@@ -1,107 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.lcyjtz.mapper.RecordMapper" >
-  <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Record" >
-    <id column="Record_ID" property="recordId" jdbcType="INTEGER" />
-    <result column="Record_Type" property="recordType" jdbcType="VARCHAR" />
-    <result column="Record_FileName" property="recordFilename" jdbcType="VARCHAR" />
-    <result column="Record_data" property="recordData" jdbcType="VARCHAR" />
-    <result column="Record_Path" property="recordPath" jdbcType="VARCHAR" />
-    <result column="Record_Title" property="recordTitle" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.example.lcyjtz.mapper.RecordMapper">
+    <resultMap id="BaseResultMap" type="com.example.lcyjtz.entity.Record">
+        <id column="Record_ID" property="recordId" jdbcType="INTEGER"/>
+        <result column="Record_Type" property="recordType" jdbcType="VARCHAR"/>
+        <result column="Record_FileName" property="recordFilename" jdbcType="VARCHAR"/>
+        <result column="Record_data" property="recordData" jdbcType="VARCHAR"/>
+        <result column="Record_Path" property="recordPath" jdbcType="VARCHAR"/>
+        <result column="Record_Title" property="recordTitle" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     Record_ID, Record_Type, Record_FileName, Record_data, Record_Path, Record_Title
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.RecordExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from record
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from record
-    where Record_ID = #{recordId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.RecordExample">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM record ORDER BY Record_ID DESC
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from record
+        where Record_ID = #{recordId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from record
     where Record_ID = #{recordId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.RecordExample" >
-    delete from record
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.lcyjtz.entity.Record" >
+    <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.RecordExample">
+        delete from record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.example.lcyjtz.entity.Record">
     insert into record (Record_ID, Record_Type, Record_FileName, 
       Record_data, Record_Path, Record_Title
       )
@@ -109,115 +101,115 @@
       #{recordData,jdbcType=VARCHAR}, #{recordPath,jdbcType=VARCHAR}, #{recordTitle,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Record" >
-    insert into record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="recordId != null" >
-        Record_ID,
-      </if>
-      <if test="recordType != null" >
-        Record_Type,
-      </if>
-      <if test="recordFilename != null" >
-        Record_FileName,
-      </if>
-      <if test="recordData != null" >
-        Record_data,
-      </if>
-      <if test="recordPath != null" >
-        Record_Path,
-      </if>
-      <if test="recordTitle != null" >
-        Record_Title,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="recordId != null" >
-        #{recordId,jdbcType=INTEGER},
-      </if>
-      <if test="recordType != null" >
-        #{recordType,jdbcType=VARCHAR},
-      </if>
-      <if test="recordFilename != null" >
-        #{recordFilename,jdbcType=VARCHAR},
-      </if>
-      <if test="recordData != null" >
-        #{recordData,jdbcType=VARCHAR},
-      </if>
-      <if test="recordPath != null" >
-        #{recordPath,jdbcType=VARCHAR},
-      </if>
-      <if test="recordTitle != null" >
-        #{recordTitle,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.lcyjtz.entity.RecordExample" resultType="java.lang.Integer" >
-    select count(*) from record
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update record
-    <set >
-      <if test="record.recordId != null" >
-        Record_ID = #{record.recordId,jdbcType=INTEGER},
-      </if>
-      <if test="record.recordType != null" >
+    <insert id="insertSelective" parameterType="com.example.lcyjtz.entity.Record">
+        insert into record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">
+                Record_ID,
+            </if>
+            <if test="recordType != null">
+                Record_Type,
+            </if>
+            <if test="recordFilename != null">
+                Record_FileName,
+            </if>
+            <if test="recordData != null">
+                Record_data,
+            </if>
+            <if test="recordPath != null">
+                Record_Path,
+            </if>
+            <if test="recordTitle != null">
+                Record_Title,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">
+                #{recordId,jdbcType=INTEGER},
+            </if>
+            <if test="recordType != null">
+                #{recordType,jdbcType=VARCHAR},
+            </if>
+            <if test="recordFilename != null">
+                #{recordFilename,jdbcType=VARCHAR},
+            </if>
+            <if test="recordData != null">
+                #{recordData,jdbcType=VARCHAR},
+            </if>
+            <if test="recordPath != null">
+                #{recordPath,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTitle != null">
+                #{recordTitle,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.example.lcyjtz.entity.RecordExample" resultType="java.lang.Integer">
+        select count(*) from record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update record
+        <set>
+            <if test="record.recordId != null">
+                Record_ID = #{record.recordId,jdbcType=INTEGER},
+            </if>
+            <if test="record.recordType != null">
+                Record_Type = #{record.recordType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordFilename != null">
+                Record_FileName = #{record.recordFilename,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordData != null">
+                Record_data = #{record.recordData,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordPath != null">
+                Record_Path = #{record.recordPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordTitle != null">
+                Record_Title = #{record.recordTitle,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update record
+        set Record_ID = #{record.recordId,jdbcType=INTEGER},
         Record_Type = #{record.recordType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.recordFilename != null" >
         Record_FileName = #{record.recordFilename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.recordData != null" >
         Record_data = #{record.recordData,jdbcType=VARCHAR},
-      </if>
-      <if test="record.recordPath != null" >
         Record_Path = #{record.recordPath,jdbcType=VARCHAR},
-      </if>
-      <if test="record.recordTitle != null" >
-        Record_Title = #{record.recordTitle,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update record
-    set Record_ID = #{record.recordId,jdbcType=INTEGER},
-      Record_Type = #{record.recordType,jdbcType=VARCHAR},
-      Record_FileName = #{record.recordFilename,jdbcType=VARCHAR},
-      Record_data = #{record.recordData,jdbcType=VARCHAR},
-      Record_Path = #{record.recordPath,jdbcType=VARCHAR},
-      Record_Title = #{record.recordTitle,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Record" >
-    update record
-    <set >
-      <if test="recordType != null" >
-        Record_Type = #{recordType,jdbcType=VARCHAR},
-      </if>
-      <if test="recordFilename != null" >
-        Record_FileName = #{recordFilename,jdbcType=VARCHAR},
-      </if>
-      <if test="recordData != null" >
-        Record_data = #{recordData,jdbcType=VARCHAR},
-      </if>
-      <if test="recordPath != null" >
-        Record_Path = #{recordPath,jdbcType=VARCHAR},
-      </if>
-      <if test="recordTitle != null" >
-        Record_Title = #{recordTitle,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where Record_ID = #{recordId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Record" >
+        Record_Title = #{record.recordTitle,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.lcyjtz.entity.Record">
+        update record
+        <set>
+            <if test="recordType != null">
+                Record_Type = #{recordType,jdbcType=VARCHAR},
+            </if>
+            <if test="recordFilename != null">
+                Record_FileName = #{recordFilename,jdbcType=VARCHAR},
+            </if>
+            <if test="recordData != null">
+                Record_data = #{recordData,jdbcType=VARCHAR},
+            </if>
+            <if test="recordPath != null">
+                Record_Path = #{recordPath,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTitle != null">
+                Record_Title = #{recordTitle,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Record_ID = #{recordId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.lcyjtz.entity.Record">
     update record
     set Record_Type = #{recordType,jdbcType=VARCHAR},
       Record_FileName = #{recordFilename,jdbcType=VARCHAR},

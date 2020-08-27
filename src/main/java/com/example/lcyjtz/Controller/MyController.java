@@ -27,6 +27,9 @@ public class MyController {
         this.myService = myService;
     }
 
+    /**
+     * Absolute project path
+     */
     private final static String ProjectPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
 
     /**
@@ -35,6 +38,7 @@ public class MyController {
      * Get the suffix name from the field, query the file suffix. TXT for the first 100 words, and then add to the entity class
      * HomePage functions are all realized
      */
+
     @GetMapping("HomePage")
     public Map<String, Object> HomePage() {
         Map<String, Object> map = new HashMap<>();
@@ -45,16 +49,13 @@ public class MyController {
             if (length > 4) {
                 String NameSuffix = FileName.substring(length - 4, length);
                 if (NameSuffix.equals(".txt")) {
-                    String FileNamePath = SelectRecordAll.get(i).getRecordPath();
-                    String Path = ProjectPath + "/static" + FileNamePath + FileName;
+                    String Path = ProjectPath + "/static" + SelectRecordAll.get(i).getRecordPath() + FileName;
                     File file = new File(Path);
                     if (!file.exists()) {
                         SelectRecordAll.get(i).setGeneralContent("没有这个文件或者路径不正确");
                     } else {
                         Tools tools = new Tools();
-                        String Content = tools.RoughlyTheContent(Path);
-                        Content = Content.substring(0, 120) + "...";
-                        SelectRecordAll.get(i).setGeneralContent(Content);
+                        SelectRecordAll.get(i).setGeneralContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
                     }
                 } else {
                     SelectRecordAll.get(i).setGeneralContent("不属于txt文件");
@@ -67,26 +68,47 @@ public class MyController {
         return map;
     }
 
+    /**
+     * @return
+     */
     @GetMapping("ArticlePage")
     public Map<String, Object> article() {
-        Map<String, Object> picture = new HashMap<>();
+        Map<String, Object> articleAll = new HashMap<>();
         List<Article> SelectArticleAll = myService.SelectArticleAll();
         for (int i = 0; i < SelectArticleAll.size(); i++) {
-            String ArticlePath = SelectArticleAll.get(i).getArticlePath();
-            String ArticleName = SelectArticleAll.get(i).getArticleFilename();
-            String Path = ProjectPath + "/static" + ArticlePath + ArticleName;
+            String Path = ProjectPath + "/static" + SelectArticleAll.get(i).getArticlePath() + SelectArticleAll.get(i).getArticleFilename();
             File file = new File(Path);
             if (!file.exists()) {
                 SelectArticleAll.get(i).setArticleContent("没有这个文件或者路径不正确");
             } else {
                 Tools tools = new Tools();
-                String Content = tools.RoughlyTheContent(Path);
-                Content = Content.substring(0, 120) + "...";
-                SelectArticleAll.get(i).setArticleContent(Content);
+                SelectArticleAll.get(i).setArticleContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
             }
         }
-        picture.put("SelectPictureAll", SelectArticleAll);
-        return picture;
+        articleAll.put("SelectArticleAll", SelectArticleAll);
+        return articleAll;
+    }
+
+    /**
+     * @param id
+     * @return Implement ID query to query the corresponding article inside all TXT text content
+     */
+    @GetMapping("ArticleByID")
+    public Map<String, Object> ArticleByID(Integer id) {
+        Map<String, Object> ArticleByIDMap = new HashMap<>();
+        List<Article> SelectArticleByID = myService.SelectArticleAByID(id);
+        for (int i = 0; i < SelectArticleByID.size(); i++) {
+            String Path = ProjectPath + "/static" + SelectArticleByID.get(i).getArticlePath() + SelectArticleByID.get(i).getArticleFilename();
+            File file = new File(Path);
+            if (!file.exists()) {
+                SelectArticleByID.get(i).setArticleContent("没有这个文件或者路径不正确");
+            } else {
+                Tools tools = new Tools();
+                SelectArticleByID.get(i).setArticleContent(tools.RoughlyTheContent(Path));
+            }
+        }
+        ArticleByIDMap.put("ArticleByIDMap", SelectArticleByID);
+        return ArticleByIDMap;
     }
 
     @GetMapping("PicturePage")
@@ -104,4 +126,5 @@ public class MyController {
         videoMap.put("SelectVideoAll", SelectVideoAll);
         return videoMap;
     }
+
 }

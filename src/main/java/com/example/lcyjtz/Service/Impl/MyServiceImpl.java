@@ -23,7 +23,7 @@ public class MyServiceImpl implements MyService {
     private VisitorMapper visitorMapper;
 
     @Autowired
-    public void setAll(AcommentMapper acommentMapper, ArticleMapper articleMapper,  PcommentMapper pcommentMapper, PictureMapper pictureMapper, PowerMapper powerMapper, RecordMapper recordMapper, VcommentMapper vcommentMapper, VideoMapper videoMapper, VisitorMapper visitorMapper) {
+    public void setAll(AcommentMapper acommentMapper, ArticleMapper articleMapper, PcommentMapper pcommentMapper, PictureMapper pictureMapper, PowerMapper powerMapper, RecordMapper recordMapper, VcommentMapper vcommentMapper, VideoMapper videoMapper, VisitorMapper visitorMapper) {
         this.articleMapper = articleMapper;
         this.pcommentMapper = pcommentMapper;
         this.pictureMapper = pictureMapper;
@@ -53,5 +53,25 @@ public class MyServiceImpl implements MyService {
     @Override
     public List<Video> SelectVideoAll() {
         return videoMapper.selectByExample(null);
+    }
+
+    @Override
+    public List<Article> SelectArticleAByID(int id) {
+        return articleMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Picture> SelectPictureByID(int id) {
+        return pictureMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Video> SelectVideoByID(int id) {
+        return videoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int AddArticle(Article article) {
+        return articleMapper.insert(article);
     }
 }

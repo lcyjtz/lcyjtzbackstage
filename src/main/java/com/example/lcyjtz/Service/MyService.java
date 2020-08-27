@@ -15,4 +15,12 @@ public interface MyService {
     List<Picture> SelectPictureAll();
 
     List<Video> SelectVideoAll();
+
+    List<Article> SelectArticleAByID(int id);
+
+    List<Picture> SelectPictureByID(int id);
+
+    List<Video> SelectVideoByID(int id);
+
+    int AddArticle(Article article);
 }

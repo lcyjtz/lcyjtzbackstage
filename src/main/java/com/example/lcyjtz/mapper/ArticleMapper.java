@@ -2,7 +2,9 @@ package com.example.lcyjtz.mapper;
 
 import com.example.lcyjtz.entity.Article;
 import com.example.lcyjtz.entity.ArticleExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ArticleMapper {
@@ -18,7 +20,7 @@ public interface ArticleMapper {
 
     List<Article> selectByExample(ArticleExample example);
 
-    Article selectByPrimaryKey(Integer articleId);
+    List<Article> selectByPrimaryKey(Integer articleId);
 
     int updateByExampleSelective(@Param("record") Article record, @Param("example") ArticleExample example);
 
