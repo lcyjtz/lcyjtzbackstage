@@ -137,4 +137,13 @@ public class MyController {
         VideoByIDMap.put("SelectVideoByID", SelectVideoByID);
         return VideoByIDMap;
     }
+
+    //功能没有完成，
+    @GetMapping("VideoAndComment")
+    public Map<String, Object> VideoAndComment(int id) {
+        Map<String, Object> VideoAndCommentMap = new HashMap<>();
+        List<Video> VideoAndCommentList = myService.SelectVideoAll();
+        VideoAndCommentMap.put("VideoAndCommentMap", VideoAndCommentList);
+        return VideoAndCommentMap;
+    }
 }

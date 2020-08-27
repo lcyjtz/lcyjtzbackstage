@@ -23,4 +23,6 @@ public interface MyService {
     List<Video> SelectVideoByID(int id);
 
     int AddArticle(Article article);
+
+    List<Video> SelectVideoAndComment(int id);
 }
