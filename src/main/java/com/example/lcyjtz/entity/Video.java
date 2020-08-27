@@ -11,6 +11,16 @@ public class Video {
 
     private String videoTitle;
 
+    private Vcomment vcomment;
+
+    public Vcomment getVcomment() {
+        return vcomment;
+    }
+
+    public void setVcomment(Vcomment vcomment) {
+        this.vcomment = vcomment;
+    }
+
     public Integer getVideoId() {
         return videoId;
     }

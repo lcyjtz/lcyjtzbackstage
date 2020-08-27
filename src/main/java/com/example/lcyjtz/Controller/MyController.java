@@ -121,12 +121,20 @@ public class MyController {
         picture.put("SelectPictureAll", SelectPictureAll);
         return picture;
     }
-    
+
     @GetMapping("VideoPage")
     public Map<String, Object> video() {
         Map<String, Object> videoMap = new HashMap<>();
         List<Video> SelectVideoAll = myService.SelectVideoAll();
         videoMap.put("SelectVideoAll", SelectVideoAll);
         return videoMap;
+    }
+
+    @GetMapping("VideoByID")
+    public Map<String, Object> videoByID(int id) {
+        Map<String, Object> VideoByIDMap = new HashMap<>();
+        List<Video> SelectVideoByID = myService.SelectVideoByID(id);
+        VideoByIDMap.put("SelectVideoByID", SelectVideoByID);
+        return VideoByIDMap;
     }
 }
