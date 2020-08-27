@@ -13,6 +13,16 @@ public class Record {
 
     private String recordTitle;
 
+    private String GeneralContent;
+
+    public String getGeneralContent() {
+        return GeneralContent;
+    }
+
+    public void setGeneralContent(String generalContent) {
+        GeneralContent = generalContent;
+    }
+
     public Integer getRecordId() {
         return recordId;
     }

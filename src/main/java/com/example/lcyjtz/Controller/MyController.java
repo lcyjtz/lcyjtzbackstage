@@ -2,12 +2,14 @@ package com.example.lcyjtz.Controller;
 
 import com.example.lcyjtz.Service.MyService;
 import com.example.lcyjtz.Tools.Tools;
+import com.example.lcyjtz.entity.Article;
+import com.example.lcyjtz.entity.Picture;
 import com.example.lcyjtz.entity.Record;
+import com.example.lcyjtz.entity.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
@@ -24,6 +26,8 @@ public class MyController {
     public void setMyService(MyService myService) {
         this.myService = myService;
     }
+
+    private final static String ProjectPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
 
     /**
      * Home page query content
@@ -42,8 +46,7 @@ public class MyController {
                 String NameSuffix = FileName.substring(length - 4, length);
                 if (NameSuffix.equals(".txt")) {
                     String FileNamePath = SelectRecordAll.get(i).getRecordPath();
-                    String cs = ClassUtils.getDefaultClassLoader().getResource("").getPath();
-                    String Path = cs + "/static" + FileNamePath + FileName;
+                    String Path = ProjectPath + "/static" + FileNamePath + FileName;
                     File file = new File(Path);
                     if (!file.exists()) {
                         SelectRecordAll.get(i).setGeneralContent("没有这个文件或者路径不正确");
@@ -64,10 +67,41 @@ public class MyController {
         return map;
     }
 
-    @PostMapping("PicturePage")
+    @GetMapping("ArticlePage")
+    public Map<String, Object> article() {
+        Map<String, Object> picture = new HashMap<>();
+        List<Article> SelectArticleAll = myService.SelectArticleAll();
+        for (int i = 0; i < SelectArticleAll.size(); i++) {
+            String ArticlePath = SelectArticleAll.get(i).getArticlePath();
+            String ArticleName = SelectArticleAll.get(i).getArticleFilename();
+            String Path = ProjectPath + "/static" + ArticlePath + ArticleName;
+            File file = new File(Path);
+            if (!file.exists()) {
+                SelectArticleAll.get(i).setArticleContent("没有这个文件或者路径不正确");
+            } else {
+                Tools tools = new Tools();
+                String Content = tools.RoughlyTheContent(Path);
+                Content = Content.substring(0, 120) + "...";
+                SelectArticleAll.get(i).setArticleContent(Content);
+            }
+        }
+        picture.put("SelectPictureAll", SelectArticleAll);
+        return picture;
+    }
+
+    @GetMapping("PicturePage")
     public Map<String, Object> picture() {
         Map<String, Object> picture = new HashMap<>();
-
+        List<Picture> SelectPictureAll = myService.SelectPictureAll();
+        picture.put("SelectPictureAll", SelectPictureAll);
         return picture;
+    }
+
+    @GetMapping("VideoPage")
+    public Map<String, Object> video() {
+        Map<String, Object> videoMap = new HashMap<>();
+        List<Video> SelectVideoAll = myService.SelectVideoAll();
+        videoMap.put("SelectVideoAll", SelectVideoAll);
+        return videoMap;
     }
 }

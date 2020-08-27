@@ -11,6 +11,17 @@ public class Article {
 
     private String articleTitle;
 
+    private String ArticleContent;
+
+    public String getArticleContent() {
+        return ArticleContent;
+    }
+
+    public void setArticleContent(String articleContent) {
+        ArticleContent = articleContent;
+    }
+
+
     public Integer getArticleId() {
         return articleId;
     }
