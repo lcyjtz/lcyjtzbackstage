@@ -51,17 +51,18 @@ public class MyController {
                 if (NameSuffix.equals(".txt")) {
                     String Path = ProjectPath + "/static" + SelectRecordAll.get(i).getRecordPath() + FileName;
                     File file = new File(Path);
+                    //There is little chance that the file will be lost
                     if (!file.exists()) {
-                        SelectRecordAll.get(i).setGeneralContent("没有这个文件或者路径不正确");
+                        SelectRecordAll.get(i).setGeneralContent("There is no file or the path is incorrect");
                     } else {
                         Tools tools = new Tools();
                         SelectRecordAll.get(i).setGeneralContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
                     }
                 } else {
-                    SelectRecordAll.get(i).setGeneralContent("不属于txt文件");
+                    SelectRecordAll.get(i).setGeneralContent("Not belong to TXT file");
                 }
             } else {
-                System.out.println(FileName + "这个文件名不正确");
+                System.out.println(FileName + "This file name is incorrect");
             }
         }
         map.put("RecordAll", SelectRecordAll);
@@ -78,8 +79,9 @@ public class MyController {
         for (int i = 0; i < SelectArticleAll.size(); i++) {
             String Path = ProjectPath + "/static" + SelectArticleAll.get(i).getArticlePath() + SelectArticleAll.get(i).getArticleFilename();
             File file = new File(Path);
+            //There is little chance that the file will be lost
             if (!file.exists()) {
-                SelectArticleAll.get(i).setArticleContent("没有这个文件或者路径不正确");
+                SelectArticleAll.get(i).setArticleContent("There is no file or the path is incorrect");
             } else {
                 Tools tools = new Tools();
                 SelectArticleAll.get(i).setArticleContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
@@ -100,8 +102,9 @@ public class MyController {
         for (int i = 0; i < SelectArticleByID.size(); i++) {
             String Path = ProjectPath + "/static" + SelectArticleByID.get(i).getArticlePath() + SelectArticleByID.get(i).getArticleFilename();
             File file = new File(Path);
+            //There is little chance that the file will be lost
             if (!file.exists()) {
-                SelectArticleByID.get(i).setArticleContent("没有这个文件或者路径不正确");
+                SelectArticleByID.get(i).setArticleContent("There is no file or the path is incorrect");
             } else {
                 Tools tools = new Tools();
                 SelectArticleByID.get(i).setArticleContent(tools.RoughlyTheContent(Path));
@@ -118,7 +121,7 @@ public class MyController {
         picture.put("SelectPictureAll", SelectPictureAll);
         return picture;
     }
-
+    
     @GetMapping("VideoPage")
     public Map<String, Object> video() {
         Map<String, Object> videoMap = new HashMap<>();
@@ -126,5 +129,4 @@ public class MyController {
         videoMap.put("SelectVideoAll", SelectVideoAll);
         return videoMap;
     }
-
 }
