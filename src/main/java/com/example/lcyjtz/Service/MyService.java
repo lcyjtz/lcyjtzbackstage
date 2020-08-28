@@ -24,5 +24,4 @@ public interface MyService {
 
     int AddArticle(Article article);
 
-    List<Video> SelectVideoAndComment(int id);
 }

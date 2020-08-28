@@ -1,6 +1,10 @@
 package com.example.lcyjtz.entity;
 
 public class Video {
+    public Video() {
+
+    }
+
     private Integer videoId;
 
     private String videoFilename;

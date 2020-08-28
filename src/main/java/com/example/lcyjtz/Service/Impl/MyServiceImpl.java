@@ -74,9 +74,4 @@ public class MyServiceImpl implements MyService {
     public int AddArticle(Article article) {
         return articleMapper.insert(article);
     }
-
-    @Override
-    public List<Video> SelectVideoAndComment(int id) {
-        return null;
-    }
 }
