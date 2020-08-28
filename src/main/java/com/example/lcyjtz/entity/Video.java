@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Video {
     public Video() {
-
+        super();
     }
 
     private Integer videoId;
