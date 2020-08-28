@@ -2,10 +2,7 @@ package com.example.lcyjtz.Controller;
 
 import com.example.lcyjtz.Service.MyService;
 import com.example.lcyjtz.Tools.Tools;
-import com.example.lcyjtz.entity.Article;
-import com.example.lcyjtz.entity.Picture;
-import com.example.lcyjtz.entity.Record;
-import com.example.lcyjtz.entity.Video;
+import com.example.lcyjtz.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -76,7 +73,6 @@ public class MyController {
      */
     @GetMapping("ArticlePage")
     public Map<String, Object> article() {
-
         Map<String, Object> articleAll = new HashMap<>();
         List<Article> SelectArticleAll = myService.SelectArticleAll();
         for (Article article : SelectArticleAll) {
@@ -114,6 +110,14 @@ public class MyController {
         }
         ArticleByIDMap.put("ArticleByIDMap", SelectArticleByID);
         return ArticleByIDMap;
+    }
+
+    @GetMapping("ArticleAComment")
+    public Map<String, Object> ArticleAComment(Integer id) {
+        Map<String, Object> ArticleACommentMap = new HashMap<>();
+        List<Acomment> ACommentList = myService.SelectAcommentByIArticleID(id);
+        ArticleACommentMap.put("ArticleACommentMap", ACommentList);
+        return ArticleACommentMap;
     }
 
     @GetMapping("PicturePage")

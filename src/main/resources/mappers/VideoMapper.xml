@@ -8,6 +8,7 @@
         <result column="Video_Data" property="videoData" jdbcType="VARCHAR"/>
         <result column="Video_Title" property="videoTitle" jdbcType="VARCHAR"/>
         <collection property="vcomment" ofType="com.example.lcyjtz.entity.Vcomment">
+        <collection property="vcomment" ofType="com.example.lcyjtz.entity.Vcomment">
             <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER"/>
             <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER"/>
             <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR"/>

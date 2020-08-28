@@ -1,9 +1,7 @@
 package com.example.lcyjtz.Service;
 
-import com.example.lcyjtz.entity.Article;
-import com.example.lcyjtz.entity.Picture;
-import com.example.lcyjtz.entity.Record;
-import com.example.lcyjtz.entity.Video;
+import com.example.lcyjtz.entity.*;
+import com.example.lcyjtz.mapper.AcommentMapper;
 
 import java.util.List;
 
@@ -24,4 +22,5 @@ public interface MyService {
 
     int AddArticle(Article article);
 
+    List<Acomment> SelectAcommentByIArticleID(int id);
 }

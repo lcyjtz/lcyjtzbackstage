@@ -15,16 +15,6 @@ public class Article {
 
     private String ArticleContent;
 
-    private List<Acomment> acomments;
-
-    public List<Acomment> getAcomments() {
-        return acomments;
-    }
-
-    public void setAcomments(List<Acomment> acomments) {
-        this.acomments = acomments;
-    }
-
     public String getArticleContent() {
         return ArticleContent;
     }

@@ -2,7 +2,9 @@ package com.example.lcyjtz.mapper;
 
 import com.example.lcyjtz.entity.Acomment;
 import com.example.lcyjtz.entity.AcommentExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface AcommentMapper {
@@ -18,7 +20,7 @@ public interface AcommentMapper {
 
     List<Acomment> selectByExample(AcommentExample example);
 
-    Acomment selectByPrimaryKey(Integer acommentId);
+    List<Acomment> selectByPrimaryKey(Integer acommentId);
 
     int updateByExampleSelective(@Param("record") Acomment record, @Param("example") AcommentExample example);
 

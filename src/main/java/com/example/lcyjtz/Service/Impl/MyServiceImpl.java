@@ -1,10 +1,7 @@
 package com.example.lcyjtz.Service.Impl;
 
 import com.example.lcyjtz.Service.MyService;
-import com.example.lcyjtz.entity.Article;
-import com.example.lcyjtz.entity.Picture;
-import com.example.lcyjtz.entity.Record;
-import com.example.lcyjtz.entity.Video;
+import com.example.lcyjtz.entity.*;
 import com.example.lcyjtz.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +11,14 @@ import java.util.List;
 @Service
 public class MyServiceImpl implements MyService {
     private ArticleMapper articleMapper;
-    private PcommentMapper pcommentMapper;
     private PictureMapper pictureMapper;
-    private PowerMapper powerMapper;
     private RecordMapper recordMapper;
-    private VcommentMapper vcommentMapper;
     private VideoMapper videoMapper;
+    private PowerMapper powerMapper;
+    private VcommentMapper vcommentMapper;
     private VisitorMapper visitorMapper;
+    private AcommentMapper acommentMapper;
+    private PcommentMapper pcommentMapper;
 
     @Autowired
     public void setAll(AcommentMapper acommentMapper, ArticleMapper articleMapper, PcommentMapper pcommentMapper, PictureMapper pictureMapper, PowerMapper powerMapper, RecordMapper recordMapper, VcommentMapper vcommentMapper, VideoMapper videoMapper, VisitorMapper visitorMapper) {
@@ -31,6 +29,7 @@ public class MyServiceImpl implements MyService {
         this.recordMapper = recordMapper;
         this.vcommentMapper = vcommentMapper;
         this.videoMapper = videoMapper;
+        this.acommentMapper = acommentMapper;
         this.visitorMapper = visitorMapper;
     }
 
@@ -74,4 +73,11 @@ public class MyServiceImpl implements MyService {
     public int AddArticle(Article article) {
         return articleMapper.insert(article);
     }
+
+    @Override
+    public List<Acomment> SelectAcommentByIArticleID(int id) {
+        return acommentMapper.selectByPrimaryKey(id);
+    }
+
+
 }

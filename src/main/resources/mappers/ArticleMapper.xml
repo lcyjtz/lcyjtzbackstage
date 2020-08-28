@@ -7,13 +7,7 @@
         <result column="Article_Path" property="articlePath" jdbcType="VARCHAR"/>
         <result column="Article_Data" property="articleData" jdbcType="VARCHAR"/>
         <result column="Article_Title" property="articleTitle" jdbcType="VARCHAR"/>
-        <collection property="acomments" ofType="com.example.lcyjtz.entity.Acomment">
-            <id column="AComment_ID" property="acommentId" jdbcType="INTEGER"/>
-            <result column="AComment_ArticleID" property="acommentArticleid" jdbcType="INTEGER"/>
-            <result column="AComment_Content" property="acommentContent" jdbcType="VARCHAR"/>
-            <result column="AComment_UserName" property="acommentUsername" jdbcType="VARCHAR"/>
-            <result column="AComment_Data" property="acommentData" jdbcType="VARCHAR"/>
-        </collection>
+
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -78,9 +72,6 @@
     <sql id="Base_Column_List">
     Article_ID, Article_FileName, Article_Path, Article_Data, Article_Title
   </sql>
-    <sql id="Base_Column_List2">
-    Article_ID, Article_FileName, Article_Path, Article_Data, Article_Title, AComment_ID, AComment_Content, AComment_UserName, AComment_Data
-  </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.ArticleExample">
         SELECT
         <include refid="Base_Column_List"/>
@@ -88,9 +79,9 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List2"/>
-        from article right join acomment
-        on Article_ID = #{articleId,jdbcType=INTEGER} and AComment_ArticleID=Article_ID;
+        <include refid="Base_Column_List"/>
+        from article
+        where Article_ID = #{articleId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
