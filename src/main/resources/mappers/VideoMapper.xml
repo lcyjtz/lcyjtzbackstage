@@ -100,7 +100,6 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List2"></include>
-
         from video right join vcomment
         on Video_ID = #{videoId,jdbcType=INTEGER} AND Video_ID=VComment_VideoID
     </select>
