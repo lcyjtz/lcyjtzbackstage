@@ -1,5 +1,7 @@
 package com.example.lcyjtz.entity;
 
+import java.util.List;
+
 public class Video {
     public Video() {
 
@@ -15,13 +17,13 @@ public class Video {
 
     private String videoTitle;
 
-    private Vcomment vcomment;
+    private List<Vcomment> vcomment;
 
-    public Vcomment getVcomment() {
+    public List<Vcomment> getVcomment() {
         return vcomment;
     }
 
-    public void setVcomment(Vcomment vcomment) {
+    public void setVcomment(List<Vcomment> vcomment) {
         this.vcomment = vcomment;
     }
 
@@ -64,4 +66,6 @@ public class Video {
     public void setVideoTitle(String videoTitle) {
         this.videoTitle = videoTitle == null ? null : videoTitle.trim();
     }
+
 }
+

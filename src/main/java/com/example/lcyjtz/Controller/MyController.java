@@ -20,6 +20,7 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin
+
 public class MyController {
     private MyService myService;
 
@@ -75,6 +76,7 @@ public class MyController {
      */
     @GetMapping("ArticlePage")
     public Map<String, Object> article() {
+
         Map<String, Object> articleAll = new HashMap<>();
         List<Article> SelectArticleAll = myService.SelectArticleAll();
         for (Article article : SelectArticleAll) {
@@ -134,6 +136,7 @@ public class MyController {
     public Map<String, Object> videoByID(int id) {
         Map<String, Object> VideoByIDMap = new HashMap<>();
         List<Video> SelectVideoByID = myService.SelectVideoByID(id);
+        System.out.println(SelectVideoByID);
         VideoByIDMap.put("SelectVideoByID", SelectVideoByID);
         return VideoByIDMap;
     }

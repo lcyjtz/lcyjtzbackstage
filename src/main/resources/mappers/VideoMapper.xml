@@ -7,13 +7,13 @@
         <result column="Video_Path" property="videoPath" jdbcType="VARCHAR"/>
         <result column="Video_Data" property="videoData" jdbcType="VARCHAR"/>
         <result column="Video_Title" property="videoTitle" jdbcType="VARCHAR"/>
-        <association column="VComment_VideoID" property="vcomment" javaType="com.example.lcyjtz.entity.Vcomment">
-            <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER"/>
-            <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER"/>
-            <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR"/>
-            <result column="VComment_UserName" property="vcommentUsername" jdbcType="VARCHAR"/>
-            <result column="VComment_Data" property="vcommentData" jdbcType="VARCHAR"/>
-        </association>
+        <collection property="vcomment" ofType="com.example.lcyjtz.entity.Vcomment">
+                <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER"/>
+                <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER"/>
+                <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR"/>
+                <result column="VComment_UserName" property="vcommentUsername" jdbcType="VARCHAR"/>
+                <result column="VComment_Data" property="vcommentData" jdbcType="VARCHAR"/>
+        </collection>
     </resultMap>
 
     <sql id="Example_Where_Clause">
@@ -99,9 +99,10 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List2"/>
-        from video,vcomment
-        where Video_ID = #{videoId,jdbcType=INTEGER} AND Video_ID=VComment_VideoID
+        <include refid="Base_Column_List2"></include>
+
+        from video right join vcomment
+        on Video_ID = #{videoId,jdbcType=INTEGER} AND Video_ID=VComment_VideoID
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video
