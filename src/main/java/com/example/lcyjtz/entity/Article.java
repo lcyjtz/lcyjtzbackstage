@@ -1,5 +1,7 @@
 package com.example.lcyjtz.entity;
 
+import java.util.List;
+
 public class Article {
     private Integer articleId;
 
@@ -12,6 +14,16 @@ public class Article {
     private String articleTitle;
 
     private String ArticleContent;
+
+    private List<Acomment> acomments;
+
+    public List<Acomment> getAcomments() {
+        return acomments;
+    }
+
+    public void setAcomments(List<Acomment> acomments) {
+        this.acomments = acomments;
+    }
 
     public String getArticleContent() {
         return ArticleContent;

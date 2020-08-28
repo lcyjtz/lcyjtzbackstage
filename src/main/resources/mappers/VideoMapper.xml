@@ -8,11 +8,11 @@
         <result column="Video_Data" property="videoData" jdbcType="VARCHAR"/>
         <result column="Video_Title" property="videoTitle" jdbcType="VARCHAR"/>
         <collection property="vcomment" ofType="com.example.lcyjtz.entity.Vcomment">
-                <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER"/>
-                <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER"/>
-                <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR"/>
-                <result column="VComment_UserName" property="vcommentUsername" jdbcType="VARCHAR"/>
-                <result column="VComment_Data" property="vcommentData" jdbcType="VARCHAR"/>
+            <id column="VComment_ID" property="vcommentId" jdbcType="INTEGER"/>
+            <result column="VComment_VideoID" property="vcommentVideoid" jdbcType="INTEGER"/>
+            <result column="VComment_Content" property="vcommentContent" jdbcType="VARCHAR"/>
+            <result column="VComment_UserName" property="vcommentUsername" jdbcType="VARCHAR"/>
+            <result column="VComment_Data" property="vcommentData" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
@@ -78,10 +78,10 @@
     </sql>
     <sql id="Base_Column_List">
     Video_ID, Video_FileName, Video_Path, Video_Data, Video_Title
-  </sql>
+    </sql>
     <sql id="Base_Column_List2">
         Video_ID, Video_FileName, Video_Path, Video_Data, Video_Title, VComment_ID, VComment_Content, VComment_UserName, VComment_Data
-  </sql>
+    </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lcyjtz.entity.VideoExample">
         select
         <if test="distinct">
