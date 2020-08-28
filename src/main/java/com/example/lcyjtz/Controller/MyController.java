@@ -8,10 +8,8 @@ import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -118,15 +116,24 @@ public class MyController {
         return ArticleACommentMap;
     }
 
+    /**
+     * It takes four parameters,Article_FileName,Article_Path,Article_Data,Article_Title.
+     * The page sends two data,Article_FileName,Article_Title.Java generates two pieces of data.
+     */
     @PostMapping("AddArticle")
-    public String AddArticle(@RequestBody Article article) {
+    public Map<String, Object> AddArticle(@RequestBody Article article) {
+        article.setArticleData((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
+        article.setArticlePath("/assets/Article/");
         int eq = myService.AddArticle(article);
+        Map<String, Object> AddArticleMap = new HashMap<>();
         if (eq > 0) {
-            System.out.println("123123132");
+            AddArticleMap.put("Cord", "200");
+            AddArticleMap.put("Result", "添加成功");
         } else {
-            System.out.println("848484");
+            AddArticleMap.put("Cord", "405");
+            AddArticleMap.put("Result", "添加失败");
         }
-        return "chengguong";
+        return AddArticleMap;
     }
 
     @GetMapping("VideoPage")
