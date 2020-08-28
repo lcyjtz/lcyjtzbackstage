@@ -106,7 +106,7 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video
     where Video_ID = #{videoId,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.VideoExample">
         delete from video
         <if test="_parameter != null">
