@@ -117,21 +117,31 @@ public class MyController {
     }
 
     /**
-     * It takes four parameters,Article_FileName,Article_Path,Article_Data,Article_Title.
-     * The page sends two data,Article_FileName,Article_Title.Java generates two pieces of data.
+     * It takes four parameters,Article_FileName,Article_Path,Article_Data,Article_Title,Article_Content.
+     * The page sends two data,Article_FileName,Article_Title,Article_Content.Java generates two pieces of data.
+     * 功能暂时没有完成
      */
     @PostMapping("AddArticle")
     public Map<String, Object> AddArticle(@RequestBody Article article) {
-        article.setArticleData((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
-        article.setArticlePath("/assets/Article/");
-        int eq = myService.AddArticle(article);
         Map<String, Object> AddArticleMap = new HashMap<>();
-        if (eq > 0) {
-            AddArticleMap.put("Cord", "200");
-            AddArticleMap.put("Result", "添加成功");
+        final String Path = "/assets/Article/";
+        article.setArticleData((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
+        article.setArticlePath(Path);
+        String Content = article.getArticleContent();
+        String SavePath = ProjectPath + "/static" + article.getArticleFilename();
+        File file = new File(SavePath);
+        if (!file.exists()) {
+            int eq = myService.AddArticle(article);
+            if (eq > 0) {
+                AddArticleMap.put("Cord", "200");
+                AddArticleMap.put("Result", "Add a success");
+            } else {
+                AddArticleMap.put("Cord", "405");
+                AddArticleMap.put("Result", "Failed to add, error unknown, check database");
+            }
         } else {
             AddArticleMap.put("Cord", "405");
-            AddArticleMap.put("Result", "添加失败");
+            AddArticleMap.put("Result", "Failed to add. This file already exists");
         }
         return AddArticleMap;
     }
