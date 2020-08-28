@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
@@ -30,7 +31,7 @@ public class MyController {
     /**
      * Absolute project path
      */
-    private final static String ProjectPath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+    private final String ProjectPath = Objects.requireNonNull(Objects.requireNonNull(ClassUtils.getDefaultClassLoader()).getResource("")).getPath();
 
     /**
      * Home page query content
@@ -43,23 +44,23 @@ public class MyController {
     public Map<String, Object> HomePage() {
         Map<String, Object> map = new HashMap<>();
         List<Record> SelectRecordAll = myService.SelectRecordAll();
-        for (int i = 0; i < SelectRecordAll.size(); i++) {
-            String FileName = SelectRecordAll.get(i).getRecordFilename();
+        for (Record record : SelectRecordAll) {
+            String FileName = record.getRecordFilename();
             int length = FileName.length();
             if (length > 4) {
                 String NameSuffix = FileName.substring(length - 4, length);
                 if (NameSuffix.equals(".txt")) {
-                    String Path = ProjectPath + "/static" + SelectRecordAll.get(i).getRecordPath() + FileName;
+                    String Path = ProjectPath + "/static" + record.getRecordPath() + FileName;
                     File file = new File(Path);
                     //There is little chance that the file will be lost
                     if (!file.exists()) {
-                        SelectRecordAll.get(i).setGeneralContent("There is no file or the path is incorrect");
+                        record.setGeneralContent("There is no file or the path is incorrect");
                     } else {
                         Tools tools = new Tools();
-                        SelectRecordAll.get(i).setGeneralContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
+                        record.setGeneralContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
                     }
                 } else {
-                    SelectRecordAll.get(i).setGeneralContent("Not belong to TXT file");
+                    record.setGeneralContent("Not belong to TXT file");
                 }
             } else {
                 System.out.println(FileName + "This file name is incorrect");
@@ -70,21 +71,21 @@ public class MyController {
     }
 
     /**
-     * @return
+     *
      */
     @GetMapping("ArticlePage")
     public Map<String, Object> article() {
         Map<String, Object> articleAll = new HashMap<>();
         List<Article> SelectArticleAll = myService.SelectArticleAll();
-        for (int i = 0; i < SelectArticleAll.size(); i++) {
-            String Path = ProjectPath + "/static" + SelectArticleAll.get(i).getArticlePath() + SelectArticleAll.get(i).getArticleFilename();
+        for (Article article : SelectArticleAll) {
+            String Path = ProjectPath + "/static" + article.getArticlePath() + article.getArticleFilename();
             File file = new File(Path);
             //There is little chance that the file will be lost
             if (!file.exists()) {
-                SelectArticleAll.get(i).setArticleContent("There is no file or the path is incorrect");
+                article.setArticleContent("There is no file or the path is incorrect");
             } else {
                 Tools tools = new Tools();
-                SelectArticleAll.get(i).setArticleContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
+                article.setArticleContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
             }
         }
         articleAll.put("SelectArticleAll", SelectArticleAll);
@@ -92,22 +93,21 @@ public class MyController {
     }
 
     /**
-     * @param id
      * @return Implement ID query to query the corresponding article inside all TXT text content
      */
     @GetMapping("ArticleByID")
     public Map<String, Object> ArticleByID(Integer id) {
         Map<String, Object> ArticleByIDMap = new HashMap<>();
         List<Article> SelectArticleByID = myService.SelectArticleAByID(id);
-        for (int i = 0; i < SelectArticleByID.size(); i++) {
-            String Path = ProjectPath + "/static" + SelectArticleByID.get(i).getArticlePath() + SelectArticleByID.get(i).getArticleFilename();
+        for (Article article : SelectArticleByID) {
+            String Path = ProjectPath + "/static" + article.getArticlePath() + article.getArticleFilename();
             File file = new File(Path);
             //There is little chance that the file will be lost
             if (!file.exists()) {
-                SelectArticleByID.get(i).setArticleContent("There is no file or the path is incorrect");
+                article.setArticleContent("There is no file or the path is incorrect");
             } else {
                 Tools tools = new Tools();
-                SelectArticleByID.get(i).setArticleContent(tools.RoughlyTheContent(Path));
+                article.setArticleContent(tools.RoughlyTheContent(Path));
             }
         }
         ArticleByIDMap.put("ArticleByIDMap", SelectArticleByID);
