@@ -17,16 +17,6 @@ public class Video {
 
     private String videoTitle;
 
-    private List<Vcomment> vcomment;
-
-    public List<Vcomment> getVcomment() {
-        return vcomment;
-    }
-
-    public void setVcomment(List<Vcomment> vcomment) {
-        this.vcomment = vcomment;
-    }
-
     public Integer getVideoId() {
         return videoId;
     }

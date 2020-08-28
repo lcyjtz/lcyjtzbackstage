@@ -18,7 +18,7 @@ public interface VcommentMapper {
 
     List<Vcomment> selectByExample(VcommentExample example);
 
-    Vcomment selectByPrimaryKey(Integer vcommentId);
+    List<Vcomment>  selectByPrimaryKey(Integer VideoID);
 
     int updateByExampleSelective(@Param("record") Vcomment record, @Param("example") VcommentExample example);
 

@@ -113,19 +113,11 @@ public class MyController {
     }
 
     @GetMapping("ArticleAComment")
-    public Map<String, Object> ArticleAComment(Integer id) {
+    public Map<String, Object> ArticleAComment(Integer ArticleID) {
         Map<String, Object> ArticleACommentMap = new HashMap<>();
-        List<Acomment> ACommentList = myService.SelectAcommentByIArticleID(id);
+        List<Acomment> ACommentList = myService.SelectACommentByIArticleID(ArticleID);
         ArticleACommentMap.put("ArticleACommentMap", ACommentList);
         return ArticleACommentMap;
-    }
-
-    @GetMapping("PicturePage")
-    public Map<String, Object> picture() {
-        Map<String, Object> picture = new HashMap<>();
-        List<Picture> SelectPictureAll = myService.SelectPictureAll();
-        picture.put("SelectPictureAll", SelectPictureAll);
-        return picture;
     }
 
     @GetMapping("VideoPage")
@@ -143,5 +135,22 @@ public class MyController {
         System.out.println(SelectVideoByID);
         VideoByIDMap.put("SelectVideoByID", SelectVideoByID);
         return VideoByIDMap;
+    }
+
+    @GetMapping("VideoVComment")
+    public Map<String, Object> VideoVComment(Integer VideoID) {
+        Map<String, Object> VideoVCommentMap = new HashMap<>();
+        List<Vcomment> VideoVCommentList = myService.SelectVideoVComment(VideoID);
+        VideoVCommentMap.put("VideoVCommentMap", VideoVCommentList);
+        return VideoVCommentMap;
+    }
+
+    @GetMapping("PicturePage")
+
+    public Map<String, Object> picture() {
+        Map<String, Object> picture = new HashMap<>();
+        List<Picture> SelectPictureAll = myService.SelectPictureAll();
+        picture.put("SelectPictureAll", SelectPictureAll);
+        return picture;
     }
 }

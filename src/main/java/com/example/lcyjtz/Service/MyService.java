@@ -20,7 +20,11 @@ public interface MyService {
 
     List<Video> SelectVideoByID(int id);
 
+    List<Acomment> SelectACommentByIArticleID(int id);
+
+    List<Vcomment> SelectVideoVComment(int VideoID);
+
     int AddArticle(Article article);
 
-    List<Acomment> SelectAcommentByIArticleID(int id);
+
 }

@@ -75,9 +75,12 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public List<Acomment> SelectAcommentByIArticleID(int id) {
+    public List<Acomment> SelectACommentByIArticleID(int id) {
         return acommentMapper.selectByPrimaryKey(id);
     }
 
-
+    @Override
+    public List<Vcomment> SelectVideoVComment(int VideoID) {
+        return vcommentMapper.selectByPrimaryKey(VideoID);
+    }
 }
