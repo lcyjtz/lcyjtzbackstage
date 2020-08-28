@@ -5,9 +5,7 @@ import com.example.lcyjtz.Tools.Tools;
 import com.example.lcyjtz.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.util.HashMap;
@@ -94,9 +92,9 @@ public class MyController {
      * @return Implement ID query to query the corresponding article inside all TXT text content
      */
     @GetMapping("ArticleByID")
-    public Map<String, Object> ArticleByID(Integer id) {
+    public Map<String, Object> ArticleByID(@RequestParam("ArticleID") Integer ArticleID) {
         Map<String, Object> ArticleByIDMap = new HashMap<>();
-        List<Article> SelectArticleByID = myService.SelectArticleAByID(id);
+        List<Article> SelectArticleByID = myService.SelectArticleAByID(ArticleID);
         for (Article article : SelectArticleByID) {
             String Path = ProjectPath + "/static" + article.getArticlePath() + article.getArticleFilename();
             File file = new File(Path);
@@ -113,11 +111,22 @@ public class MyController {
     }
 
     @GetMapping("ArticleAComment")
-    public Map<String, Object> ArticleAComment(Integer ArticleID) {
+    public Map<String, Object> ArticleAComment(@RequestParam("ArticleID") Integer ArticleID) {
         Map<String, Object> ArticleACommentMap = new HashMap<>();
         List<Acomment> ACommentList = myService.SelectACommentByIArticleID(ArticleID);
         ArticleACommentMap.put("ArticleACommentMap", ACommentList);
         return ArticleACommentMap;
+    }
+
+    @PostMapping("AddArticle")
+    public String AddArticle(@RequestBody Article article) {
+        int eq = myService.AddArticle(article);
+        if (eq > 0) {
+            System.out.println("123123132");
+        } else {
+            System.out.println("848484");
+        }
+        return "chengguong";
     }
 
     @GetMapping("VideoPage")
@@ -129,16 +138,16 @@ public class MyController {
     }
 
     @GetMapping("VideoByID")
-    public Map<String, Object> videoByID(int id) {
+    public Map<String, Object> videoByID(@RequestParam("VideoID") Integer VideoID) {
         Map<String, Object> VideoByIDMap = new HashMap<>();
-        List<Video> SelectVideoByID = myService.SelectVideoByID(id);
+        List<Video> SelectVideoByID = myService.SelectVideoByID(VideoID);
         System.out.println(SelectVideoByID);
         VideoByIDMap.put("SelectVideoByID", SelectVideoByID);
         return VideoByIDMap;
     }
 
     @GetMapping("VideoVComment")
-    public Map<String, Object> VideoVComment(Integer VideoID) {
+    public Map<String, Object> VideoVComment(@RequestParam("VideoID") Integer VideoID) {
         Map<String, Object> VideoVCommentMap = new HashMap<>();
         List<Vcomment> VideoVCommentList = myService.SelectVideoVComment(VideoID);
         VideoVCommentMap.put("VideoVCommentMap", VideoVCommentList);
