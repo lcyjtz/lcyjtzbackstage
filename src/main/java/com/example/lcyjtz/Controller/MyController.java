@@ -146,7 +146,6 @@ public class MyController {
     }
 
     @GetMapping("PicturePage")
-
     public Map<String, Object> picture() {
         Map<String, Object> picture = new HashMap<>();
         List<Picture> SelectPictureAll = myService.SelectPictureAll();
