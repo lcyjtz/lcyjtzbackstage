@@ -8,7 +8,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -122,44 +121,23 @@ public class MyController {
      */
     @PostMapping("AddArticle")
     public Map<String, Object> AddArticle(@RequestBody Article article) {
+        boolean flag = false;
         Map<String, Object> AddArticleMap = new HashMap<>();
-        article.setArticleData((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
-        article.setArticlePath("/assets/Article/");
-        File file = new File(ProjectPath + "/static/assets/Article/");
+        String Path = ProjectPath + "/static/assets/Article/";
+        File file = new File(Path);
         if (file.exists()) {
-            try {
-                //The possibility of file creation reporting an error is small
-                if (file.createNewFile()) {
-                    BufferedWriter out = new BufferedWriter(new FileWriter(ProjectPath + "/static" + article.getArticleFilename() + ".txt"));
-                    out.write(article.getArticleContent());
-                    out.flush();
-                    out.close();
-                    int eq = myService.AddArticle(article);
-                    if (eq > 0) {
-                        AddArticleMap.put("Cord", "200");
-                        AddArticleMap.put("Result", "Add a success");
-                    } else {
-                        AddArticleMap.put("Cord", "405");
-                        AddArticleMap.put("Result", "Failed to add, error unknown, check database");
-                    }
-                } else {
-                    AddArticleMap.put("Cord", "405");
-                    AddArticleMap.put("Result", "Add failed, error unknown, check database, and save path");
-                }
-            } catch (IOException e) {
-                AddArticleMap.put("Cord", "405");
-                AddArticleMap.put("Result", "Failed to create folder");
-                e.printStackTrace();
-            }
+            flag = new Tools().CreateAFile(article, Path);
         } else {
-            //路径不存在的处理创建新文件夹，存储文件 添加工具类。
             if (file.mkdirs()) {
-                 //调用创建方法
-            } else {
-
+                flag = new Tools().CreateAFile(article, Path);
             }
-            AddArticleMap.put("Cord", "405");
-            AddArticleMap.put("Result", "Failed to add. This file already exists");
+        }
+        if (flag) {
+            AddArticleMap.put("Cord", "200");
+            AddArticleMap.put("Result", "Successfully Added");
+        } else {
+            AddArticleMap.put("Cord", "500");
+            AddArticleMap.put("Result", "No folder or failed to create folder, same file name for folder, database with duplicate fields.");
         }
         return AddArticleMap;
     }
