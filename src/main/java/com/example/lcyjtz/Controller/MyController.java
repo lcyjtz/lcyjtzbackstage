@@ -123,19 +123,15 @@ public class MyController {
     @PostMapping("AddArticle")
     public Map<String, Object> AddArticle(@RequestBody Article article) {
         Map<String, Object> AddArticleMap = new HashMap<>();
-        final String Path = "/assets/Article/";
         article.setArticleData((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
-        article.setArticlePath(Path);
-        String Content = article.getArticleContent();
-        String SavePath = ProjectPath + "/static" + article.getArticleFilename();
-        File file = new File(SavePath);
-        if (!file.exists()) {
+        article.setArticlePath("/assets/Article/");
+        File file = new File(ProjectPath + "/static/assets/Article/");
+        if (file.exists()) {
             try {
-                boolean flog = file.createNewFile();
                 //The possibility of file creation reporting an error is small
-                if (flog) {
-                    BufferedWriter out = new BufferedWriter(new FileWriter(SavePath));
-                    out.write(Content);
+                if (file.createNewFile()) {
+                    BufferedWriter out = new BufferedWriter(new FileWriter(ProjectPath + "/static" + article.getArticleFilename() + ".txt"));
+                    out.write(article.getArticleContent());
                     out.flush();
                     out.close();
                     int eq = myService.AddArticle(article);
@@ -156,6 +152,12 @@ public class MyController {
                 e.printStackTrace();
             }
         } else {
+            //路径不存在的处理创建新文件夹，存储文件 添加工具类。
+            if (file.mkdirs()) {
+                 //调用创建方法
+            } else {
+
+            }
             AddArticleMap.put("Cord", "405");
             AddArticleMap.put("Result", "Failed to add. This file already exists");
         }
