@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -119,7 +119,6 @@ public class MyController {
     /**
      * It takes four parameters,Article_FileName,Article_Path,Article_Data,Article_Title,Article_Content.
      * The page sends two data,Article_FileName,Article_Title,Article_Content.Java generates two pieces of data.
-     * 功能暂时没有完成
      */
     @PostMapping("AddArticle")
     public Map<String, Object> AddArticle(@RequestBody Article article) {
@@ -131,13 +130,30 @@ public class MyController {
         String SavePath = ProjectPath + "/static" + article.getArticleFilename();
         File file = new File(SavePath);
         if (!file.exists()) {
-            int eq = myService.AddArticle(article);
-            if (eq > 0) {
-                AddArticleMap.put("Cord", "200");
-                AddArticleMap.put("Result", "Add a success");
-            } else {
+            try {
+                boolean flog = file.createNewFile();
+                //The possibility of file creation reporting an error is small
+                if (flog) {
+                    BufferedWriter out = new BufferedWriter(new FileWriter(SavePath));
+                    out.write(Content);
+                    out.flush();
+                    out.close();
+                    int eq = myService.AddArticle(article);
+                    if (eq > 0) {
+                        AddArticleMap.put("Cord", "200");
+                        AddArticleMap.put("Result", "Add a success");
+                    } else {
+                        AddArticleMap.put("Cord", "405");
+                        AddArticleMap.put("Result", "Failed to add, error unknown, check database");
+                    }
+                } else {
+                    AddArticleMap.put("Cord", "405");
+                    AddArticleMap.put("Result", "Add failed, error unknown, check database, and save path");
+                }
+            } catch (IOException e) {
                 AddArticleMap.put("Cord", "405");
-                AddArticleMap.put("Result", "Failed to add, error unknown, check database");
+                AddArticleMap.put("Result", "Failed to create folder");
+                e.printStackTrace();
             }
         } else {
             AddArticleMap.put("Cord", "405");
