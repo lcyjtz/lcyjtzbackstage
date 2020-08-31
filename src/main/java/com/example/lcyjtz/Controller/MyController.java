@@ -44,13 +44,16 @@ public class MyController {
                 String NameSuffix = FileName.substring(length - 4, length);
                 if (NameSuffix.equals(".txt")) {
                     String Path = ProjectPath + "/static" + record.getRecordPath() + FileName;
-                    File file = new File(Path);
                     //There is little chance that the file will be lost
-                    if (!file.exists()) {
+                    if (!new File(Path).exists()) {
                         record.setGeneralContent("There is no file or the path is incorrect");
                     } else {
-                        Tools tools = new Tools();
-                        record.setGeneralContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
+                        String Content = new Tools().RoughlyTheContent(Path);
+                        if (Content.length() > 120) {
+                            record.setGeneralContent(Content.substring(0, 120) + "...");
+                        } else {
+                            record.setGeneralContent(Content);
+                        }
                     }
                 } else {
                     record.setGeneralContent("Not belong to TXT file");
@@ -63,27 +66,28 @@ public class MyController {
         return map;
     }
 
-    /**
-     *
-     */
     @GetMapping("ArticlePage")
     public Map<String, Object> article() {
         Map<String, Object> articleAll = new HashMap<>();
         List<Article> SelectArticleAll = myService.SelectArticleAll();
         for (Article article : SelectArticleAll) {
             String Path = ProjectPath + "/static" + article.getArticlePath() + article.getArticleFilename();
-            File file = new File(Path);
             //There is little chance that the file will be lost
-            if (!file.exists()) {
+            if (!new File(Path).exists()) {
                 article.setArticleContent("There is no file or the path is incorrect");
             } else {
-                Tools tools = new Tools();
-                article.setArticleContent(tools.RoughlyTheContent(Path).substring(0, 120) + "...");
+                String Content = new Tools().RoughlyTheContent(Path);
+                if (Content.length() > 120) {
+                    article.setArticleContent(Content.substring(0, 120) + "...");
+                } else {
+                    article.setArticleContent(Content);
+                }
             }
         }
         articleAll.put("SelectArticleAll", SelectArticleAll);
         return articleAll;
     }
+
 
     /**
      * @return Implement ID query to query the corresponding article inside all TXT text content
@@ -94,13 +98,11 @@ public class MyController {
         List<Article> SelectArticleByID = myService.SelectArticleAByID(ArticleID);
         for (Article article : SelectArticleByID) {
             String Path = ProjectPath + "/static" + article.getArticlePath() + article.getArticleFilename();
-            File file = new File(Path);
-            //There is little chance that the file will be lost
-            if (!file.exists()) {
+            //There is  little chance that the file will be lost
+            if (!new File(Path).exists()) {
                 article.setArticleContent("There is no file or the path is incorrect");
             } else {
-                Tools tools = new Tools();
-                article.setArticleContent(tools.RoughlyTheContent(Path));
+                article.setArticleContent(new Tools().RoughlyTheContent(Path));
             }
         }
         ArticleByIDMap.put("ArticleByIDMap", SelectArticleByID);
@@ -118,6 +120,7 @@ public class MyController {
     /**
      * It takes four parameters,Article_FileName,Article_Path,Article_Data,Article_Title,Article_Content.
      * The page sends two data,Article_FileName,Article_Title,Article_Content.Java generates two pieces of data.
+     * This resolves operations that have directory folders and operations that do not have file directories。
      */
     @PostMapping("AddArticle")
     public Map<String, Object> AddArticle(@RequestBody Article article) {
@@ -151,7 +154,7 @@ public class MyController {
     }
 
     @GetMapping("VideoByID")
-    public Map<String, Object> videoByID(@RequestParam("VideoID") Integer VideoID) {
+    public Map<String, Object> VideoByID(@RequestParam("VideoID") Integer VideoID) {
         Map<String, Object> VideoByIDMap = new HashMap<>();
         List<Video> SelectVideoByID = myService.SelectVideoByID(VideoID);
         System.out.println(SelectVideoByID);
@@ -173,5 +176,13 @@ public class MyController {
         List<Picture> SelectPictureAll = myService.SelectPictureAll();
         picture.put("SelectPictureAll", SelectPictureAll);
         return picture;
+    }
+
+    @PostMapping("AddPicture")
+    public Map<String, Object> AddPicture(@RequestBody Picture picture) {
+        Map<String, Object> AddPictureMap = new HashMap<>();
+        String Path = ProjectPath + "/static/assets/Picture/";
+        Tools tools = new Tools();
+        return AddPictureMap;
     }
 }
