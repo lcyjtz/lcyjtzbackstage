@@ -3,7 +3,6 @@ package com.example.lcyjtz.Controller;
 import com.example.lcyjtz.Service.MyService;
 import com.example.lcyjtz.Tools.Tools;
 import com.example.lcyjtz.entity.*;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
@@ -179,7 +178,7 @@ public class MyController {
         picture.put("SelectPictureAll", SelectPictureAll);
         return picture;
     }
-//
+
 //    @PostMapping("AddPicture")
 //    public Map<String, Object> AddPicture(@RequestBody Picture picture) {
 //        Map<String, Object> AddPictureMap = new HashMap<>();
