@@ -1,11 +1,11 @@
 package com.example.lcyjtz.Service;
 
 import com.example.lcyjtz.entity.*;
-import com.example.lcyjtz.mapper.AcommentMapper;
 
 import java.util.List;
 
 public interface MyService {
+    boolean login(Visitor visitor);
     List<Record> SelectRecordAll();
 
     List<Article> SelectArticleAll();
@@ -25,6 +25,5 @@ public interface MyService {
     List<Vcomment> SelectVideoVComment(int VideoID);
 
     int AddArticle(Article article);
-
 
 }

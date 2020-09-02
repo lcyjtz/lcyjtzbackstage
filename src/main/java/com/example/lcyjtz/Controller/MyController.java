@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
 
@@ -177,12 +178,28 @@ public class MyController {
         picture.put("SelectPictureAll", SelectPictureAll);
         return picture;
     }
+//
+//    @PostMapping("AddPicture")
+//    public Map<String, Object> AddPicture(@RequestBody Picture picture) {
+//        Map<String, Object> AddPictureMap = new HashMap<>();
+//        String Path = ProjectPath + "/static/assets/Picture/";
+//        Tools tools = new Tools();
+//        return AddPictureMap;
+//    }
 
-    @PostMapping("AddPicture")
-    public Map<String, Object> AddPicture(@RequestBody Picture picture) {
-        Map<String, Object> AddPictureMap = new HashMap<>();
-        String Path = ProjectPath + "/static/assets/Picture/";
-        Tools tools = new Tools();
-        return AddPictureMap;
+    @PostMapping("AdminLogin")
+    public Map<String, Object> AdminLogin(@RequestParam Visitor visitor, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        if (myService.login(visitor)) {
+            session.setAttribute("AccountNumber", visitor.getVisitorname());
+            int Result = 200;
+            list.add(Result);
+        } else {
+            int Result = 500;
+            list.add(Result);
+        }
+        map.put("LoginResult", list);
+        return map;
     }
 }
