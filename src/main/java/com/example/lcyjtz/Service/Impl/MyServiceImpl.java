@@ -3,6 +3,7 @@ package com.example.lcyjtz.Service.Impl;
 import com.example.lcyjtz.Service.MyService;
 import com.example.lcyjtz.entity.*;
 import com.example.lcyjtz.mapper.*;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +38,16 @@ public class MyServiceImpl implements MyService {
     @Override
     public boolean login(Visitor visitor) {
         boolean flag = false;
-        Visitor visitor1 = visitorMapper.selectByPrimaryKey(visitor.getVisitorid());
+        Visitor visitor1 = visitorMapper.selectByPrimaryKey(visitor.getVisitorname());
         if (visitor1 != null) {
             if (visitor.getVisitorname().equals(visitor1.getVisitorname()) && visitor.getVisitorpwd().equals(visitor1.getVisitorpwd())) {
-                flag = true;
+                if (visitor1.getVisitorroleid().equals(99)) {
+                    flag = true;
+                }
             }
-
         }
         return flag;
     }
-
 
     @Override
     public List<Record> SelectRecordAll() {
