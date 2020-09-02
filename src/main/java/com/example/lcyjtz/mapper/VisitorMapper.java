@@ -2,7 +2,9 @@ package com.example.lcyjtz.mapper;
 
 import com.example.lcyjtz.entity.Visitor;
 import com.example.lcyjtz.entity.VisitorExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface VisitorMapper {
@@ -18,7 +20,7 @@ public interface VisitorMapper {
 
     List<Visitor> selectByExample(VisitorExample example);
 
-    Visitor selectByPrimaryKey(String name);
+    Visitor selectByPrimaryKey(String VisitorName);
 
     int updateByExampleSelective(@Param("record") Visitor record, @Param("example") VisitorExample example);
 

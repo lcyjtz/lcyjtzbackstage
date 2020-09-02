@@ -2,7 +2,9 @@ package com.example.lcyjtz.mapper;
 
 import com.example.lcyjtz.entity.Record;
 import com.example.lcyjtz.entity.RecordExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RecordMapper {
@@ -10,7 +12,7 @@ public interface RecordMapper {
 
     int deleteByExample(RecordExample example);
 
-    int deleteByPrimaryKey(Integer recordId);
+    int deleteByPrimaryKey(String RecordFileName);
 
     int insert(Record record);
 

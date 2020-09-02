@@ -3,6 +3,7 @@ package com.example.lcyjtz.Controller;
 import com.example.lcyjtz.Service.MyService;
 import com.example.lcyjtz.Tools.Tools;
 import com.example.lcyjtz.entity.*;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
@@ -200,6 +201,21 @@ public class MyController {
             list.add(Result);
         }
         map.put("LoginResult", list);
+        return map;
+    }
+
+    @GetMapping("deleteRecord")
+    public Map<String, Object> deleteRecord(@RequestParam String name) {
+        Map<String, Object> map = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        if (myService.deleteRecord(name)) {
+            int Result = 200;
+            list.add(Result);
+        } else {
+            int Result = 500;
+            list.add(Result);
+        }
+        map.put("deleteRecord", list);
         return map;
     }
 }

@@ -83,9 +83,9 @@
         from record
         where Record_ID = #{recordId,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from record
-    where Record_ID = #{recordId,jdbcType=INTEGER}
+    where Record_FileName = #{RecordFileName,jdbcType=VARCHAR}
   </delete>
     <delete id="deleteByExample" parameterType="com.example.lcyjtz.entity.RecordExample">
         delete from record

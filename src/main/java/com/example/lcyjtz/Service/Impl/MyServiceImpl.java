@@ -3,7 +3,6 @@ package com.example.lcyjtz.Service.Impl;
 import com.example.lcyjtz.Service.MyService;
 import com.example.lcyjtz.entity.*;
 import com.example.lcyjtz.mapper.*;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +18,10 @@ public class MyServiceImpl implements MyService {
     private VcommentMapper vcommentMapper;
     private VisitorMapper visitorMapper;
     private AcommentMapper acommentMapper;
-    private PcommentMapper pcommentMapper;
 
     @Autowired
-    public void setAll(AcommentMapper acommentMapper, ArticleMapper articleMapper, PcommentMapper pcommentMapper, PictureMapper pictureMapper, PowerMapper powerMapper, RecordMapper recordMapper, VcommentMapper vcommentMapper, VideoMapper videoMapper, VisitorMapper visitorMapper) {
+    public void setAll(AcommentMapper acommentMapper, ArticleMapper articleMapper, PictureMapper pictureMapper, PowerMapper powerMapper, RecordMapper recordMapper, VcommentMapper vcommentMapper, VideoMapper videoMapper, VisitorMapper visitorMapper) {
         this.articleMapper = articleMapper;
-        this.pcommentMapper = pcommentMapper;
         this.pictureMapper = pictureMapper;
         this.powerMapper = powerMapper;
         this.recordMapper = recordMapper;
@@ -40,10 +37,19 @@ public class MyServiceImpl implements MyService {
         Visitor visitor1 = visitorMapper.selectByPrimaryKey(visitor.getVisitorname());
         if (visitor1 != null) {
             if (visitor.getVisitorname().equals(visitor1.getVisitorname()) && visitor.getVisitorpwd().equals(visitor1.getVisitorpwd())) {
-                if (powerMapper.selectByPrimaryKey(visitor1.getVisitorroleid()).equals("developer")){
+                if (powerMapper.selectByPrimaryKey(visitor1.getVisitorroleid()).equals("developer")) {
                     flag = true;
                 }
             }
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean deleteRecord(String name) {
+        boolean flag = false;
+        if (recordMapper.deleteByPrimaryKey(name) > 0) {
+            flag = true;
         }
         return flag;
     }
@@ -74,11 +80,6 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public List<Picture> SelectPictureByID(int id) {
-        return pictureMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
     public List<Video> SelectVideoByID(int id) {
         return videoMapper.selectByPrimaryKey(id);
     }
@@ -97,4 +98,5 @@ public class MyServiceImpl implements MyService {
     public List<Vcomment> SelectVideoVComment(int VideoID) {
         return vcommentMapper.selectByPrimaryKey(VideoID);
     }
+
 }
