@@ -34,14 +34,13 @@ public class MyServiceImpl implements MyService {
         this.visitorMapper = visitorMapper;
     }
 
-    //要名字查询
     @Override
     public boolean login(Visitor visitor) {
         boolean flag = false;
         Visitor visitor1 = visitorMapper.selectByPrimaryKey(visitor.getVisitorname());
         if (visitor1 != null) {
             if (visitor.getVisitorname().equals(visitor1.getVisitorname()) && visitor.getVisitorpwd().equals(visitor1.getVisitorpwd())) {
-                if (visitor1.getVisitorroleid().equals(99)) {
+                if (powerMapper.selectByPrimaryKey(visitor1.getVisitorroleid()).equals("developer")){
                     flag = true;
                 }
             }
