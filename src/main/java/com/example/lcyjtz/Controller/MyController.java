@@ -13,7 +13,6 @@ import java.util.*;
 
 @RestController
 @CrossOrigin
-
 public class MyController {
     private MyService myService;
 
@@ -34,17 +33,25 @@ public class MyController {
      * HomePage functions are all realized
      */
 
+        @RequestMapping("Blog")
+        public String index() {
+            return "redirect:cs.html";
+        }
+
+
     @GetMapping("HomePage")
     public Map<String, Object> HomePage() {
         Map<String, Object> map = new HashMap<>();
         List<Record> SelectRecordAll = myService.SelectRecordAll();
+        StringBuilder stringBuilder = new StringBuilder();
         for (Record record : SelectRecordAll) {
             String FileName = record.getRecordFilename();
             int length = FileName.length();
             if (length > 4) {
                 String NameSuffix = FileName.substring(length - 4, length);
                 if (NameSuffix.equals(".txt")) {
-                    String Path = ProjectPath + "/static" + record.getRecordPath() + FileName;
+                    stringBuilder.append(ProjectPath).append("/static").append(record.getRecordPath()).append(FileName);
+                    String Path = stringBuilder.toString();
                     //There is little chance that the file will be lost
                     if (!new File(Path).exists()) {
                         record.setGeneralContent("There is no file or the path is incorrect");
@@ -60,7 +67,7 @@ public class MyController {
                     record.setGeneralContent("Not belong to TXT file");
                 }
             } else {
-                System.out.println(FileName + "This file name is incorrect");
+                System.out.println("The filename" + FileName + "is incorrect");
             }
         }
         map.put("RecordAll", SelectRecordAll);
